@@ -1,4 +1,4 @@
-## Messioanic Assembly of Yahweh
+## Messianic Assembly of Yahweh - KABOROK
 
 ### Initial Documentation
 
