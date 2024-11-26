@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>| MAY - History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about_us_style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Messianic Assembly of Yahweh - KABOROK</h1>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/aboutus">About Us</a></li>
+                <li><a href="/events">Events</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Section for church history -->
+        <section class="history-section">
+            <h2>Our History</h2>
+                <!-- {{ church_history }} Dynamic placeholder for the church's history -->
+                <section class="history-section">
+                    <p>
+                        The Messianic Assembly of Yahweh - KABOROK began its journey of faith in the late 1980s, inspired by a small group of devoted believers seeking to restore the ancient paths of worship as outlined in the Scriptures. With a deep conviction for truth and a passion for community, these pioneers established a foundation that continues to guide the assembly today.
+                    </p>
+                    <p>
+                        In its early years, the church met in humble homes and under open skies, united by a shared commitment to Yahweh and His teachings. Despite facing challenges, the faithful congregation grew steadily, attracting members from diverse backgrounds who sought to deepen their understanding of the Word.
+                    </p>
+                    <p>
+                        By the mid-1990s, the assembly had outgrown its informal meeting spaces and laid the groundwork for constructing its first sanctuary. This monumental step symbolized the community's resilience and dedication to providing a sacred space for worship, fellowship, and spiritual growth.
+                    </p>
+                    <p>
+                        Over the decades, the Messianic Assembly of Yahweh has become a beacon of hope and truth in the region. With a focus on teaching the Torah and spreading the Gospel of the Kingdom, the church has touched countless lives through its ministries and outreach programs.
+                    </p>
+                    <p>
+                        The church's leadership has played a crucial role in shaping its mission and vision. Inspired by Yahweh's commandments, the assembly emphasizes living a life of obedience, love, and service, striving to be a light in the world.
+                    </p>
+                    <p>
+                        One of the defining moments in the church's history was the introduction of the Hebrew Calendar into its worship practices. This shift marked a return to the biblical rhythms of time, aligning the community's celebrations and observances with Yahweh's appointed times.
+                    </p>
+                    <p>
+                        The assembly has also prioritized youth empowerment and education, launching various programs to equip the younger generation with spiritual, academic, and practical skills. These efforts aim to nurture future leaders who will carry forward the legacy of faith.
+                    </p>
+                    <p>
+                        Through the years, the Messianic Assembly of Yahweh has maintained strong ties with other assemblies worldwide, fostering unity and collaboration among believers. These connections have enriched the local church, bringing diverse perspectives and shared experiences to its community.
+                    </p>
+                    <p>
+                        The church has also embraced technology and innovation, launching digital platforms to reach a global audience. From online worship services to virtual Bible studies, the assembly continues to adapt to the changing needs of its members while staying rooted in Scripture.
+                    </p>
+                    <p>
+                        Today, the Messianic Assembly of Yahweh - KABOROK stands as a testament to the power of faith, perseverance, and community. With Yahweh's guidance, the assembly looks forward to a future filled with hope, purpose, and continued service in His name.
+                    </p>
+                </section>
+            
+            <img src="{{ url_for('static', filename='images/church.jpg') }}" alt="Church History Image">
+        </section>
+
+        <!-- Section for featured images -->
+        <section class="featured-images">
+            <h2>Memories Through Time</h2>
+            <div class="image-gallery">
+                {% for image in featured_images %}
+                <div class="image-item">
+                    <img src="{{ url_for('static', filename='images/' + image.filename) }}" alt="{{ image.alt }}">
+                    <p>{{ image.caption }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Archive section -->
+        <section class="archive-section">
+            <h2>Photo Archive</h2>
+            <ul>
+                {% for year, images in archives %}
+                <li>
+                    <b>{{ year }}</b>
+                    <ul>
+                        {% for image in images %}
+                        <li>
+                            <a href="{{ url_for('static', filename='images/archives/' + image.filename) }}" target="_blank">
+                                {{ image.caption }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 MAY | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

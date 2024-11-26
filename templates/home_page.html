@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAY - KABOROK | Home Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home_page_style.css') }}">
+
+</head>
+<body>
+
+    <!-- <li>Header </li>
+    <li><a href="/">Home (may.png)</a></li>
+    <li><a href="http://127.0.0.1:5555/login">log In account</a></li>
+    <li><a href="http://127.0.0.1:5555/signup">sign Up account</a></li>
+    <li><a href="">announcements</a></li>
+    <li>Church theme, vision, history</li>
+    <li>Weekly verse</li>
+    <li>footer : socials</li> -->
+    <header>
+        <nav>
+            <h1>Messianic assembly of Yahweh - KABOROK</h1>
+
+            <h3>Welcome</h3>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="http://127.0.0.1:5555/signup">sign Up account</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="http://127.0.0.1:5555/aboutus">about us</a></li>
+                <li><b><i><a href="/">hebrew calendar</a></i></b></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="landing">
+            <div class="image-container">
+                <img src="{{ url_for('static', filename='images/church.jpg') }}" alt="Church">
+            </div>
+            <div class="info">
+                <h2>Theme of the Year</h2>
+                <p>“United in Faith, Serving with Love”</p>
+                <h2>Vision Statement</h2>
+                <p>We love what Yahweh loves , and hates what he hates</p>
+                <h2>Daily Verse</h2>
+                <b><i><p>For I know the plans I have for you, declares the Yahweh - Jeremiah 29:11</p></i></b>
+            </div>
+        </div>
+    </main>
+
+    <li><a href="/announcements">Announcements</a></li>
+ 
+    <footer>
+        <p>&copy; 2024 MAY | All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>

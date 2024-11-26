@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAY - KABOROK | Log In Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/log_in_style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Messianic Assembly Of Yahweh</h1>
+            <ul>
+                <li><a href="http://127.0.0.1:5555/aboutus">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="login-container">
+        <form action="/login" method="POST" class="login-form">
+            <h2>Login</h2>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button type="submit">Login</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 MAY-Kbrk | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

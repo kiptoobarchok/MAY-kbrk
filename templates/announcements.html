@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Announcements</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/announcement_style.css') }}">
+</head>
+<body>
+    <!-- Bulletin Board Title -->
+    <b><i>Bulletin Board</i></b>
+
+    <!-- Bulletin Board List -->
+    <ol>
+        <i>1. Regularly updated posts section for church news, events, and special activities.</i>
+    </ol>
+    <ol>
+        <i>2. Digital bulletin with archives for past posts, accessible for reference.</i>
+    </ol>
+    <ol>
+        <i>3. Option to subscribe to notifications for updates and alerts.</i>
+    </ol>
+
+    <!-- Announcements Header -->
+    <header class="header"><i><b>Announcements</b></i></header>
+
+    <!-- Announcements Section -->
+    {% extends "layout.html" %}
+    {% block content %}
+        {% for post in posts %}
+        <div class="announcement-post">
+            <h5>{{ post.date_posted }}</h5>
+            <p>
+                <strong>{{ post.author.username }}</strong> says: <br>
+                <b><i>{{ post.body }}</i></b>
+            </p>
+        </div>
+        {% endfor %}
+    {% endblock content %}
+</body>
+</html>
