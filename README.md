@@ -31,3 +31,18 @@
 - theme, vision, bible verse, announcements, 
 
 static data = images, styling, calendar
+
+
+## content management system 
+
+Recommendations
+For a Church Website:
+
+Start with Strapi or Contentful for a modern and API-driven approach.
+Alternatively, use Wagtail or WordPress for a full CMS experience.
+For Easy Integration with Flask/Django:
+
+Go for Wagtail, Mezzanine, or a custom solution with Flask-Admin.
+For Cost-Effective or Small-Scale Needs:
+
+Use Netlify CMS or Forestry for managing dynamic content on a budget.
