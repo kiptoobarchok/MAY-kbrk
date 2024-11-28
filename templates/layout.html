@@ -3,11 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document lay Out</title>
-    
-</head>
+    {% if title  %}
+        <title>MAY - Kbrk | {{ title  }}</title>
+    {% else %}
+        <title>MAY - Kbrk</title>
+    {% endif %} 
+</head> 
 <body>
-    {%block content%}
-    {%endblock%}
-</body>
-</html>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif%}
+    {% endwith %}
+
+    {% block content%}
+    
+    {% endblock content%}
+</html> 

@@ -1,40 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>| MAY Sign Up</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/sign_up_style.css') }}">
-</head>
-<body>
-    <main class="login-container">
-        <form action="/signup" method="POST" class="login-form">
-            <h2><i><b>SIGN UP</b></i></h2>
+{% extends "layout.html" %}
 
-            <li>
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-            </li>
-
-            <li>
-                <label for="username">email:</label>
-                <input type="text" id="username" name="username" required>
-            </li>
-
-            <li>
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </li>
+{% block content%}
+    <div>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset>
+                <legend> Join Us Today</legend>
+                <p>
+                    {{form.firstname.label }} <br>
+                    {{ form.firstname(size=32)}} <br>
+                    {% for error in form.firstname.errors %}
+                    <span style="color: brown;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
                 
-            <li>
-                <label for="confirm_password">Confirm Password:</label>
-                <input type="password" id="confirm_password" name="confirm_password" required>
-            </li>
-               
-            <li>
-                <button type="submit">Sign Up</button>    
-            </li>
+                <p>
+                    {{form.lastname.label }} <br>
+                    {{ form.lastname(size=32)}} <br>
+                    {% for error in form.lastname.errors %}
+                    <span style="color: brown;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{form.email.label }} <br>
+                    {{ form.email(size=32)}} <br>
+                    {% for error in form.email.errors %}
+                    <span style="color: brown;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{form.username.label }} <br>
+                    {{ form.username(size=32)}} <br>
+                    {% for error in form.username.errors %}
+                    <span style="color: brown;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+
+                <p>
+                    {{form.password.label }} <br>
+                    {{ form.password(size=32)}} <br>
+                    {% for error in form.password.errors %}
+                    <span style="color: brown;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{form.confirm_password.label }} <br>
+                    {{ form.confirm_password(size=32)}} <br>
+                    {% for error in form.confirm_password.errors %}
+                        <span style="color: brown;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+            </fieldset>
+
+            <div>
+                {{ form.submit(class="btn") }}
+            </div>
         </form>
-    </main>
-</body>
-</html>
+    </div>
+
+    <div>
+        <small>
+            already have an account? <a href="{{ url_for('login') }}">Log in</a>
+        </small>
+    </div>
+{% endblock content%}  

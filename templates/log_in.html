@@ -1,34 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAY - KABOROK | Log In Page</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/log_in_style.css') }}">
-</head>
-<body>
-    <header>
-        <nav>
-            <h1>Messianic Assembly Of Yahweh</h1>
-            <ul>
-                <li><a href="http://127.0.0.1:5555/aboutus">About Us</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main class="login-container">
-        <form action="/login" method="POST" class="login-form">
-            <h2>Login</h2>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            
-            <button type="submit">Login</button>
-        </form>
-    </main>
-    <footer>
-        <p>&copy; 2024 MAY-Kbrk | All Rights Reserved</p>
-    </footer>
-</body>
-</html>
+{% extends "layout.html" %}
+
+
+{% block content %}
+
+<div>
+    <li><a href="{{url_for('home')}}">home</a></li>
+</div>
+
+<div>
+    <!-- <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset>
+            <legend> Shallom Brethren!</legend>
+            <p>
+                {{ form.username.label }} <br>
+                {{ form.username(size=32) }} <br>
+                {% for error in form.username.errors %}
+                    <span style="color: darkred;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.password.label }} <br>
+                {{ form.password(size=32) }} <br>
+                {% for error in form.password.errors %}
+                    <span style="color: darkred;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+
+        </fieldset>
+
+        <p>{{ form.remember() }} {{ form.remember.label }}</p>
+        <p>{{ form.submit }}</p>
+
+        <div>
+            <small><a href="#">forgot password</a></small>
+        </div>
+    </form> -->
+
+     <fieldset>
+        <legend>Shallom Brethren!!</legend>
+        
+        <form action="" method="POST" novalidate>
+        {{ form.hidden_tag()}}
+
+        <p>
+            {{form.username.label }} <br>
+            {{ form.username(size=32)}} <br>
+            {% for error in form.username.errors %}
+            <span style="color: brown;">[{{ error }}]</span>
+            {% endfor%}
+        </p>
+
+        <p>
+            {{form.password.label }} <br>
+            {{ form.password(size=32)}} <br>
+            {% for error in form.password.errors %}
+            <span style="color: brown;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+
+            {{ form.remember() }} {{ form.remember.label }}
+        </p>
+        <p>{{ form.submit()}}</p>
+
+        <p><small><a href="#">forgot password</a></small></p>
+    </form>
+     </fieldset>
+    
+
+</div>
+<div>
+    <small>join us? <a href="{{url_for('signup')}}"> sign up</a></small>
+</div>
+
+{% endblock content%}
