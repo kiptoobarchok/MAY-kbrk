@@ -1,4 +1,4 @@
-{%extends "layout.html"%}
+{% extends "layout.html" %}
 
 {% block content %}
 <body>
@@ -11,4 +11,5 @@
     {% endfor %}
 
 </body>
+<small><a href="{{url_for('home')}}">return home</a></small>
 {% endblock content %}

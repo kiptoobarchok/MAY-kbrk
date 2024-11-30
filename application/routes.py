@@ -1,17 +1,8 @@
-#!/usr/bin/env python3
+from flask import  render_template, flash, redirect, url_for
+from application.forms import RegistrationForm, LoginForm
+from application.models import User , Post
+from application import app
 
-from flask import Flask, render_template, flash, redirect, url_for
-
-from forms import RegistrationForm, LoginForm
-
-
-app = Flask(__name__)
-
-app.config['SECRET_KEY'] = '392ed6116bcd27c6ac099518ca51c150'
-
-
-# My Dummy data
-# data base call 
 posts = [
     {
     'author': {'username': 'pastor Eliud'},
@@ -77,6 +68,3 @@ def about_us():
 @app.route('/announcements')
 def announcements():
     return render_template('announcements.html', title='Announcements page', posts=posts)
- 
-if __name__ == '__main__':
-    app.run(debug=1, port=5555)

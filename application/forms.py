@@ -13,6 +13,7 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
+    # flash message
     username = StringField('Username', validators=[DataRequired(), Length(min=3, max=20)])
     password =  PasswordField('Password', validators=[DataRequired(), Length(min=4)])
     remember = BooleanField('Remember me')
