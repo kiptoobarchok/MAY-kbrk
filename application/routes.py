@@ -71,7 +71,7 @@ def account():
     elif request.method == 'GET':
         form.email.data = current_user.email
         form.username.data = current_user.username
-    img_file = url_for('static', filename='profile_pics/' + (current_user.img_file or 'default.png'))
+    img_file = url_for('static', filename='profile_pics/' + (current_user.img_file))
     return render_template('account.html', title='Account Page', img_file=img_file, form=form)
 
 @app.route('/post/new', methods=['GET', 'POST'])
