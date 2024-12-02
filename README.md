@@ -22,9 +22,8 @@ This project aims to design and develop comprehensive and user-friendly website 
 
 ### Cotributors
 - [Edmond Bore]()
-- [pst Eliud Chepkwony](https://wa.me/+254720879114)
+- [pst Eliud Chepkwony](https://wa.me/+254721544385)
 
 
 ### Features
-
 
