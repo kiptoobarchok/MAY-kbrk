@@ -1,48 +1,30 @@
 ## Messianic Assembly of Yahweh - KABOROK
 
-### Initial Documentation
-
 [project proposal](https://docs.google.com/document/d/1_ahp2PNbXBPoqhBHc8nvaHfmP5c3ARM2KYK3Sg5v3lQ/edit?tab=t.0)
 
 
 ['!.may.png']()
 
-### Technologies
 
-- python / flask
-- bootstrap (for styling)
-- RestFul API
-- SQL /mysql, sqlAlchemy
-- web serving - nginx
-- 
+## Team
+- [KIPTOO CALEB](https://github.com/kiptoobarchok)
 
-## MVP
--  log in / (save in database)
-- intergrate Bible***
-- **Lesson** - main issue
-- **Musicality function / - add (+ manually) hymns**
-- manage offergings and tithes
-- custom to the locale
-- user experience
+## Overview
 
-## 1. Log In / landing page / sign up page
+This project aims to design and develop comprehensive and user-friendly website that caters to the needs of [Messianic Assembly of Yahweh - Kaborok](), offering an online platform for sharing church history, lessons, giving opportunities, and more. This website aims to enhance communication, community engagement, and facilitate smooth management of church information.
 
-- dynamic data 
-- theme, vision, bible verse, announcements, 
+## Table of contents
+- Contributors
+- Features
+- Technical Stack
+- Usage
+- API Documentation
 
-static data = images, styling, calendar
+### Cotributors
+- [Edmond Bore]()
+- [pst Eliud Chepkwony](https://wa.me/+254720879114)
 
 
-## content management system 
+### Features
 
-Recommendations
-For a Church Website:
 
-Start with Strapi or Contentful for a modern and API-driven approach.
-Alternatively, use Wagtail or WordPress for a full CMS experience.
-For Easy Integration with Flask/Django:
-
-Go for Wagtail, Mezzanine, or a custom solution with Flask-Admin.
-For Cost-Effective or Small-Scale Needs:
-
-Use Netlify CMS or Forestry for managing dynamic content on a budget.

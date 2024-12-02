@@ -1,15 +1,38 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<body>
-    <b><i>Announcements</i></b>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="mb-4 text-center text-primary"><b>Announcements</b></h1>
 
-    {% for post in posts %}
-        <h2><b><i>{{ post.author.username , post.profile_pic }}</i></b></h2>
-        <h5>{{ post.date_posted }}</h5>
-        <p>{{ post.body }}</p>
-    {% endfor %}
+            {% for post in posts %}
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-light d-flex align-items-center">
+                    <!-- Profile Picture -->
+                    <img src="{{ url_for('static', filename='profile_pics/' + (post.author.img_file if post.author.img_file else 'default.jpg')) }}" 
+                         class="rounded-circle me-3" 
+                         style="width: 50px; height: 50px; object-fit: cover;">
 
-</body>
-<small><a href="{{url_for('home')}}">return home</a></small>
+                    <!-- Author and Date -->
+                    <div>
+                        <h5 class="mb-0"><b>{{ post.author.username }}</b></h5>
+                        <small class="text-muted">{{ post.date_posted.strftime('%d-%m-%Y') }}</small>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title text-primary"><b>{{ post.title }}</b></h4>
+                    <p class="card-text">{{ post.content }}</p>
+                </div>
+                <div class="card-footer text-end bg-light">
+                    <a href="{{url_for('post', post_id=post.id)}}" class="btn btn-outline-primary btn-sm">Read more</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="text-center mt-4">
+        <a href="{{ url_for('home') }}" class="btn btn-link">Return Home</a>
+    </div>
+</div>
 {% endblock content %}

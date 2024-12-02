@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3>Make announcement</h3>
+                </div>
+                <div class="card-body">
+                    <form action="" method="POST" novalidate>
+                        {{ form.hidden_tag() }}
+
+                        <div class="mb-3">
+                            <label for="title" class="form-label">{{ form.title.label }}</label>
+                            {{ form.title(class="form-control", id="title", placeholder="Enter title") }}
+                            {% for error in form.title.errors %}
+                            <div class="form-text text-danger">
+                                {{ error }}
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="content" class="form-label">{{ form.content.label }}</label>
+                            {{ form.content(class="form-control", id="content", placeholder="Enter content") }}
+                            {% for error in form.content.errors %}
+                            <div class="form-text text-danger">
+                                {{ error }}
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="d-grid">
+                            {{ form.submit(class="btn btn-primary btn-lg") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

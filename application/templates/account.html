@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <!-- Profile Card -->
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header text-center bg-primary text-white">
+                    <h3>Account Details</h3>
+                </div>
+                <!-- <p>{{ img_file }}</p> -->
+
+                <div class="card-body text-center">
+                    <!-- Profile Image -->
+                    <div class="mb-4">
+                        <img src="{{ img_file }}" alt="Profile Picture" class="rounded-circle border" style="width: 150px; height: 150px; object-fit: cover;">
+                    </div>
+                    <h4 class="mb-2">{{ current_user.username }}</h4>
+                    <p class="text-muted">{{ current_user.email }}</p>
+                    <hr>
+
+                    <!-- Form for Updating Account Information -->
+                    <form method="POST" action="" class="border p-4 rounded shadow-sm">
+                        {{ form.hidden_tag() }}
+                        <fieldset>
+                            <legend class="mb-4">Update Info</legend>
+                            <div class="mb-3">
+                                {{ form.email.label(class="form-label") }}
+                                {{ form.email(class="form-control") }}
+                                {% for error in form.email.errors %}
+                                    <div class="text-danger">[{{ error }}]</div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="mb-3">
+                                {{ form.username.label(class="form-label") }}
+                                {{ form.username(class="form-control") }}
+                                {% for error in form.username.errors %}
+                                    <div class="text-danger">[{{ error }}]</div>
+                                {% endfor %}
+                            </div>
+                        </fieldset>
+
+                        <div class="text-center">
+                            {{ form.submit(class="btn btn-primary") }}
+                            <br>
+                            <a href="{{url_for('home')}}"><small>home</small></a>
+                        </div>
+
+                        <!-- Profile Picture Upload -->
+                        <div class="mt-4">
+                            {{ form.picture.label(class="form-label") }}
+                            {{ form.picture(class="form-control-file") }}
+                            {% if form.picture.errors %}
+                                {% for error in form.picture.errors %}
+                                    <div class="text-danger">[{{ error }}]</div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
