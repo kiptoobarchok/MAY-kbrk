@@ -20,7 +20,7 @@ This project aims to design and develop comprehensive and user-friendly website 
 - Usage
 - API Documentation
 
-### Cotributors
+### Contributors
 - [pst Edmond Bore]()
 - [pst Eliud Chepkwony](https://wa.me/+254721544385)
 
