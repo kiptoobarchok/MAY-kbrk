@@ -1,7 +1,8 @@
 ## Messianic Assembly of Yahweh - KABOROK
 
-[project proposal](https://docs.google.com/document/d/1_ahp2PNbXBPoqhBHc8nvaHfmP5c3ARM2KYK3Sg5v3lQ/edit?tab=t.0)
+- [project proposal](https://docs.google.com/document/d/1_ahp2PNbXBPoqhBHc8nvaHfmP5c3ARM2KYK3Sg5v3lQ/edit?tab=t.0)
 
+- [Project Presentation](https://docs.google.com/presentation/d/1eplZX3N-fscSVEwZrf43O0c_vmLWj11VfdOtNl6TxFM/edit?usp=sharing)
 
 <!-- ['!.may.png']() -->
 
