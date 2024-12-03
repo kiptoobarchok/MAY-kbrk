@@ -77,9 +77,9 @@ def account():
             current_user.img_file = picture_file
         current_user.email = form.email.data
         current_user.username = form.username.data
-        db.session.commit()
+        db.session.commit()                                                                                                                                  
         flash('Account info updated.')
-        return redirect(url_for('home'))
+        return redirect(url_for('account'))  
     
     elif request.method == 'GET':
         form.email.data = current_user.email
@@ -96,7 +96,7 @@ def new_post():
         db.session.add(post)
         db.session.commit()
         flash(f'announced')
-        return redirect(url_for('home'))
+        return redirect(url_for('announcements'))
 
     return render_template('create_post.html', title='New Post', form=form, h3='Create Post')
 
@@ -117,7 +117,7 @@ def update_post(post_id):
         post.title =form.title.data
         post.content =form.content.data
         db.session.commit()
-        flash('Announcement updated.', 'success')
+        flash('Announcement updated.')
         return redirect(url_for('announcements'))
     elif request.method == 'GET':
         form.title.data = post.title
