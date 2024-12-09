@@ -119,6 +119,6 @@ http://127.0.0.1:5555
 - Lesson database
 - Different locales for branches accessing the info specific to them
 
-### Contributors
+### Acknowledgement
 - The development team of the Messianic Assembly of Yahweh - KABOROK.
 - The community for their support and feedback.

@@ -3,7 +3,7 @@ from application.forms import RegistrationForm, LoginForm, PostForm, UpdateAccou
 from application.models import User , Announcement
 from application import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
-import secrets, os
+import secrets, os, time
 
 
 @app.route('/')
@@ -57,14 +57,16 @@ def announcements():
     posts=Announcement.query.all()
     return render_template('announcements.html', title='Announcements page', posts=posts)
 
-
+## save picture
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
-    picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn )
+    picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
+    os.makedirs(os.path.join(app.root_path, 'static/profile_pics'), exist_ok=True)  # Ensure directory exists
+    if not form_picture.filename:
+        raise ValueError("Uploaded file has no filename.")
     form_picture.save(picture_path)
-
     return picture_fn
 
 @app.route('/account', methods=['GET', 'POST'])
@@ -72,23 +74,39 @@ def save_picture(form_picture):
 def account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
-        if form.picture.data:
-            picture_file = save_picture(form.picture.data)
-            current_user.img_file = picture_file
+        # Handle profile picture update
+        if form.profile.data:
+            picture_file = save_picture(form.profile.data)
+            current_user.img_file = picture_file  # Update user's image file
+            print(f"Picture file saved as: {picture_file}")  # Debug
+            
+        # Update other user details
         current_user.email = form.email.data
         current_user.username = form.username.data
-        db.session.commit()                                                                                                                                  
-        flash('Account info updated.')
-        return redirect(url_for('account'))  
-    
-    elif request.method == 'GET':
-        form.email.data = current_user.email
-        form.username.data = current_user.username 
-    img_file = url_for('static', filename='profile_pics/' + (current_user.img_file))
-    return render_template('account.html', title='Account Page', img_file=img_file, form=form)
 
+        try:
+            db.session.commit()  # Commit all changes
+            db.session.refresh(current_user)  # Ensure changes are reflected
+            print(f"Updated image file: {current_user.img_file}")  # Debug
+        except Exception as e:
+            print(f"Database commit failed: {e}")
+        
+        # Redirect to avoid form resubmission
+        return redirect(url_for('account'))
+
+    elif request.method == 'GET':
+        # Populate the form with current user data
+        form.email.data = current_user.email
+        form.username.data = current_user.username
+        print(f"Loaded form: email={form.email.data}, username={form.username.data}")
+
+    # Cache-busting for profile picture
+    img_file = url_for('static', filename=f'profile_pics/{current_user.img_file}') + '?t=' + str(int(time.time()))
+    print(f"Image file URL sent to template: {img_file}")
+
+    return render_template('account.html', title='Account Page', img_file=img_file, form=form)
 @app.route('/post/new', methods=['GET', 'POST'])
-@login_required
+@login_required  
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
