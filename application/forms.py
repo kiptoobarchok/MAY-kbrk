@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
 from application.models import User
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField 
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 
 class RegistrationForm(FlaskForm):
@@ -43,7 +43,7 @@ class PostForm(FlaskForm):
 
 class UpdateAccountForm(FlaskForm):
     email = StringField('Email',validators=[DataRequired(), Email()])
-    profile = FileField('Update dp', validators=[FileAllowed(['jpg', 'png'])])
+    profile = FileField('Update dp', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
     username = StringField('Username', validators=[DataRequired(), Length(min=3, max=20)])
     submit = SubmitField('update')
 
@@ -61,7 +61,23 @@ class UpdateAccountForm(FlaskForm):
             user  = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('Email is taken. Please choose another')
-        
+    
+
+
+class AddLessonForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    scripture_reading = TextAreaField('scripture_reading', validators=[DataRequired()])
+    memory_verse = TextAreaField('memory_verse', validators=[DataRequired()])
+    introduction = TextAreaField('introduction')
+    conclusion = TextAreaField('conclusion')
+    submit = SubmitField('add lesson')
+
+
+class AddBodyForm(FlaskForm):
+    question = TextAreaField('question')
+    answers = TextAreaField('answers')
+    lesson_id = IntegerField('Lesson ID')
+    submit = SubmitField('add questions and answers')
 
 
  

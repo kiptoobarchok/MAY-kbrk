@@ -1,6 +1,6 @@
 from flask import  render_template, flash, redirect, url_for, request, abort
-from application.forms import RegistrationForm, LoginForm, PostForm, UpdateAccountForm
-from application.models import User , Announcement
+from application.forms import RegistrationForm, LoginForm, PostForm, UpdateAccountForm, AddLessonForm , AddBodyForm
+from application.models import User , Announcement, Lesson, Body
 from application import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets, os, time
@@ -135,7 +135,6 @@ def update_post(post_id):
         post.title =form.title.data
         post.content =form.content.data
         db.session.commit()
-        flash('Announcement updated.')
         return redirect(url_for('announcements'))
     elif request.method == 'GET':
         form.title.data = post.title
@@ -153,3 +152,49 @@ def delete_post(post_id):
     db.session.commit()
     flash(f'Deleted')
     return redirect(url_for('announcements'))
+
+
+@app.route('/lesson', methods=['GET', 'POST'])
+@login_required  
+def lesson():
+    # query all questions
+    lessons = Lesson.query.all()
+    return render_template('lesson.html', title='Lessons', lessons=lessons)
+
+
+@app.route('/add_lesson', methods=['GET', 'POST'])
+@login_required  
+def add_lesson():
+    form = AddLessonForm()
+    if form.validate_on_submit():
+        lesson = Lesson(title=form.title.data, scripture_reading=form.scripture_reading.data, memory_verse=form.memory_verse.data, introduction=form.introduction.data, conclusion=form.conclusion.data)
+        db.session.add(lesson)
+        db.session.commit()
+        return redirect(url_for('lesson'))
+    return render_template('add_lesson.html', title='Add Lesson' , form=form)
+
+
+@app.route('/lesson/<int:lesson_id>', methods=['GET'])
+@login_required  
+def view_lesson(lesson_id):
+    # Fetch the lesson from the database by its ID
+    lesson = Lesson.query.get_or_404(lesson_id)
+    return render_template('view_lesson.html', title=lesson.title, lesson=lesson)
+
+@app.route('/add_content', methods=['GET', 'POST'])
+@login_required  
+def add_content():
+    form =AddBodyForm()
+    if form.validate_on_submit():
+        body = Body(question=form.question.data, answers=form.answers.data, lesson_id=form.lesson_id.data)
+        db.session.add(body)
+        db.session.commit()
+        return redirect(url_for('lesson'))
+    print('unsuccseful')
+    return render_template('add_content.html', title='view Lesson', form=form)
+
+@app.route('/lesson/<int:lesson_id>/body', methods=['GET'])
+@login_required  
+def view_body(lesson_id):
+    body = Body.query.filter_by(lesson_id =lesson_id)
+    return render_template('view_body.html', title=f'Lesson {lesson_id} : Question and Answers' , body=body)

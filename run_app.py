@@ -5,4 +5,4 @@ with app.app_context():
 
 
 if __name__ == '__main__':
-    app.run(debug=1, port=5555)
+    app.run(debug=1, port=5005)

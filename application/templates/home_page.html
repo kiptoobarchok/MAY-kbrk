@@ -15,8 +15,15 @@
                         <ul class="navbar-nav ms-auto">
                             {% if current_user.is_authenticated %}
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">Lessons</a>
+                                    <a href="{{url_for('lesson')}}" class="nav-link">Lessons</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{url_for('add_lesson')}}" class="nav-link">add Lesson</a>
+                                </li>
+                                <li>
+                                    <a href="{{url_for('add_content')}}"> add content to lesson </a>
+                                </li>
+                                
                                 <li class="nav-item">
                                     <a href="{{ url_for('new_post') }}" class="nav-link"> Make an Announcement</a>
                                 </li>

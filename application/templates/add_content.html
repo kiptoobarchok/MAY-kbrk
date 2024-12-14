@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.question.label }} <br>
+            {{ form.question }}
+            {% for err in form.question.errors %}
+                <span style="color: brown;">[{{err}}]</span>
+            {% endfor%}
+        </div>
+        <div>
+            {{ form.answers.label }} <br>
+            {{ form.answers }}
+            {% for err in form.answers.errors %}
+                <span style="color: brown;">[{{err}}]</span>
+            {% endfor%}
+        </div>
+        <div>
+            {{ form.lesson_id.label }} <br>
+            {{ form.lesson_id }}
+            {% for err in form.lesson_id.errors %}
+                <span style="color: brown;">[{{err}}]</span>
+            {% endfor%}
+        </div>
+        <div>
+            {{ form.submit}}
+        </div>
+        <small><a href="{{url_for('home')}}">Home</a></small>
+    </form>
+{% endblock content %}

@@ -1,0 +1,13 @@
+{% extends "layout.html"%}
+
+{% block content%}
+    <h1>{{ lesson.title }}</h1>
+    <p><strong>Date:</strong> {{ lesson.date_posted }}</p>
+    <p><strong>Scripture Reading:</strong> {{ lesson.scripture_reading }}</p>
+    <p><strong>Memory Verse:</strong> {{ lesson.memory_verse }}</p>
+    <p><strong>Introduction:</strong> {{ lesson.introduction }}</p>
+    <p><strong>Conclusion:</strong> {{ lesson.conclusion }}</p>
+    <u><a href="{{url_for('view_body', lesson_id=lesson.id)}}">Questions and Answers</a></u> <br>
+    <small><a href="{{url_for('home')}}">home</a></small> <br>
+    <small><a href="{{url_for('add_content')}}">Add questions and answers</a></small>
+{% endblock content%}

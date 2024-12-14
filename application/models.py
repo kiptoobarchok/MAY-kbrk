@@ -30,4 +30,31 @@ class Announcement(db.Model):
 
     def __repr__(self):
         return f"post [{self.title}, {self.date_posted}]"
+    
+
+class Lesson(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    scripture_reading = db.Column(db.Text, nullable=False)
+    memory_verse = db.Column(db.Text, nullable=False)
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    introduction = db.Column(db.Text)
+    conclusion = db.Column(db.Text)
+    questions = db.relationship('Body', backref='Lesson.id', lazy="joined")
+
+    def __repr__(self):
+        return f"Lesson:  [{self.title}]"
+    
+class Body(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    question = db.Column(db.Text)
+    answers = db.Column(db.Text)
+    lesson_id = db.Column(db.Integer, db.ForeignKey('lesson.id'), nullable=0)
+
+    def __repr__(self):
+        return f"Question:  [{self.question}, {self.answers}]"
+    
+
+    
+
 
