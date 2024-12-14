@@ -4,6 +4,8 @@
 
 - [Project Presentation](https://docs.google.com/presentation/d/1eplZX3N-fscSVEwZrf43O0c_vmLWj11VfdOtNl6TxFM/edit?usp=sharing)
 
+- [project pitch]()
+
 <!-- ['!.may.png']() -->
 
 
@@ -109,6 +111,26 @@ python run_app.py
 ```
 http://127.0.0.1:5555
 ```
+### Intergration of lesson to the app
+
+Ability to add lesson , add its questions and answers and render them
+
+**usage**
+- to add lesson
+```
+http://127.0.0.1:5005/add_lesson
+```
+
+- to add questions and answers to the lessons
+```
+http://127.0.0.1:5005/add_content
+```
+
+- to view all lessons
+```
+http://127.0.0.1:5005/lesson
+```
+
 
 ### Future enhancements and ideas
 
@@ -118,6 +140,9 @@ http://127.0.0.1:5555
 - Advanced search functionality for announcements and archives
 - Lesson database
 - Different locales for branches accessing the info specific to them
+
+
+
 
 ### Acknowledgement
 - The development team of the Messianic Assembly of Yahweh - KABOROK.
