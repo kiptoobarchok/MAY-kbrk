@@ -1,48 +1,67 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">{{ title }}</h1>
 
     <form action="" method="post">
-        {{form.hidden_tag()}}
-        <div>
-            {{ form.title.label }} <br>
-            {{ form.title }}
+        {{ form.hidden_tag() }}
+        
+        <div class="mb-3">
+            <label for="title" class="form-label">{{ form.title.label }}</label>
+            {{ form.title(class="form-control") }}
             {% for err in form.title.errors %}
-                <span style="color: brown;">[{{err}}]</span>
-            {% endfor%}
-        </div>
-        <div>
-            {{ form.scripture_reading.label }} <br>
-            {{ form.scripture_reading }}
-            {% for err in form.scripture_reading.errors %}
-                <span style="color: brown;">[{{err}}]</span>
-            {% endfor%}
-        </div>
-        <div>
-            {{ form.memory_verse.label }} <br>
-            {{ form.memory_verse }}
-            {% for err in form.memory_verse.errors %}
-                <span style="color: brown;">[{{err}}]</span>
-            {% endfor%}
-        </div>
-        <div>
-            {{ form.introduction.label }} <br>
-            {{ form.introduction }}
-            {% for err in form.introduction.errors %}
-                <span style="color: brown;">[{{err}}]</span>
-            {% endfor%}
-        </div>
-        <div>
-            {{ form.conclusion.label }} <br>
-            {{ form.conclusion }}
-            {% for err in form.conclusion.errors %}
-                <span style="color: brown;">[{{err}}]</span>
-            {% endfor%}
+            <div class="text-danger">
+                <small>[{{ err }}]</small>
+            </div>
+            {% endfor %}
         </div>
 
-        <div>
-            {{ form.submit}}
+        <div class="mb-3">
+            <label for="scripture_reading" class="form-label">{{ form.scripture_reading.label }}</label>
+            {{ form.scripture_reading(class="form-control") }}
+            {% for err in form.scripture_reading.errors %}
+            <div class="text-danger">
+                <small>[{{ err }}]</small>
+            </div>
+            {% endfor %}
         </div>
-        <small><a href="{{url_for('home')}}">Home</a></small>
+
+        <div class="mb-3">
+            <label for="memory_verse" class="form-label">{{ form.memory_verse.label }}</label>
+            {{ form.memory_verse(class="form-control") }}
+            {% for err in form.memory_verse.errors %}
+            <div class="text-danger">
+                <small>[{{ err }}]</small>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            <label for="introduction" class="form-label">{{ form.introduction.label }}</label>
+            {{ form.introduction(class="form-control") }}
+            {% for err in form.introduction.errors %}
+            <div class="text-danger">
+                <small>[{{ err }}]</small>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            <label for="conclusion" class="form-label">{{ form.conclusion.label }}</label>
+            {{ form.conclusion(class="form-control") }}
+            {% for err in form.conclusion.errors %}
+            <div class="text-danger">
+                <small>[{{ err }}]</small>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
     </form>
+
+    <small><a href="{{ url_for('home') }}" class="btn btn-link">Home</a></small>
+</div>
 {% endblock content %}

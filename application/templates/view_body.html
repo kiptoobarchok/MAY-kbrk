@@ -1,19 +1,23 @@
-{% extends "layout.html"%}
+{% extends "layout.html" %}
 
-{% block content%}
-  
-    <h1>{{ title }}</h1>
-    
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">{{ title }}</h1>
+
     {% if body %}
-        <ul>
-            {% for entry in body %}
-                <li>
-                    <strong>Question:</strong> {{ entry.question }}<br>
-                    <strong>Answers:</strong> {{ entry.answers if entry.answers else 'No answers provided' }}
-                </li>
-            {% endfor %}
-        </ul>
+    <ul class="list-group">
+        {% for entry in body %}
+        <li class="list-group-item mb-3">
+            <strong>Question:</strong> {{ entry.question }}<br>
+            <strong>Answers:</strong> 
+            <p class="mt-2">
+                {{ entry.answers if entry.answers else 'No answers provided' }}
+            </p>
+        </li>
+        {% endfor %}
+    </ul>
     {% else %}
-        <p>No body content found for this lesson.</p>
+    <p class="text-muted">No body content found for this lesson.</p>
     {% endif %}
-{% endblock content%}
+</div>
+{% endblock content %}

@@ -1,13 +1,19 @@
-{% extends "layout.html"%}
+{% extends "layout.html" %}
 
-{% block content%}
-    <h1>{{ lesson.title }}</h1>
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">{{ lesson.title }}</h1>
+    
     <p><strong>Date:</strong> {{ lesson.date_posted }}</p>
     <p><strong>Scripture Reading:</strong> {{ lesson.scripture_reading }}</p>
     <p><strong>Memory Verse:</strong> {{ lesson.memory_verse }}</p>
     <p><strong>Introduction:</strong> {{ lesson.introduction }}</p>
     <p><strong>Conclusion:</strong> {{ lesson.conclusion }}</p>
-    <u><a href="{{url_for('view_body', lesson_id=lesson.id)}}">Questions and Answers</a></u> <br>
-    <small><a href="{{url_for('home')}}">home</a></small> <br>
-    <small><a href="{{url_for('add_content')}}">Add questions and answers</a></small>
-{% endblock content%}
+
+    <div class="mt-4">
+        <u><a href="{{ url_for('view_body', lesson_id=lesson.id) }}" class="btn btn-link">Questions and Answers</a></u> <br>
+        <small><a href="{{ url_for('home') }}" class="btn btn-link">Home</a></small> <br>
+        <small><a href="{{ url_for('add_content') }}" class="btn btn-link">Add Questions and Answers</a></small>
+    </div>
+</div>
+{% endblock content %}

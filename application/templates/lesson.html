@@ -1,14 +1,20 @@
-{% extends "layout.html"%}
+{% extends "layout.html" %}
 
-{% block content%}
-    <div>
-        <p>lessons</p>
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Lessons</h1>
+
+    <div class="list-group">
+        {% for lesson in lessons %}
+        <a href="{{ url_for('view_lesson', lesson_id=lesson.id) }}" class="list-group-item list-group-item-action">
+            {{ lesson }}
+        </a>
+        {% endfor %}
     </div>
-    {% for lesson in lessons %}
-        <div><a href="{{url_for('view_lesson', lesson_id=lesson.id)}}"><li>{{lesson}}</li></a></div>
-    {% endfor %}
 
-    <small><a href="{{url_for('home')}}">home</a></small> <br>
-    <a href="{{url_for('add_content')}}"> add content to lesson </a>
-    
-{% endblock content%}
+    <div class="mt-4">
+        <small><a href="{{ url_for('home') }}" class="btn btn-link">Home</a></small> <br>
+        <a href="{{ url_for('add_content') }}" class="btn btn-link">Add Content to Lesson</a>
+    </div>
+</div>
+{% endblock content %}
