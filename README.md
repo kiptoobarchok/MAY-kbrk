@@ -118,17 +118,17 @@ Ability to add lesson , add its questions and answers and render them
 **usage**
 - to add lesson
 ```
-http://127.0.0.1:5005/add_lesson
+http://127.0.0.1:5555/add_lesson
 ```
 
 - to add questions and answers to the lessons
 ```
-http://127.0.0.1:5005/add_content
+http://127.0.0.1:5555/add_content
 ```
 
 - to view all lessons
 ```
-http://127.0.0.1:5005/lesson
+http://127.0.0.1:5555/lesson
 ```
 
 

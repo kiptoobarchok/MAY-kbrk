@@ -17,9 +17,6 @@
                                 <li class="nav-item">
                                     <a href="{{url_for('lesson')}}" class="nav-link">Lessons</a>
                                 </li>
-                                 <li class="nav-item">
-                                    <a href="#" class="nav-link"> Update Lesson</a>
-                                </li>
                                 <li class="nav-item">
                                     <a href="{{url_for('add_lesson')}}" class="nav-link">add Lesson</a>
                                 </li>
@@ -34,6 +31,9 @@
                                     <a href="{{ url_for('account') }}" class="nav-link">Account</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="{{ url_for('users') }}" class="nav-link">Members</a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{ url_for('logout') }}" class="nav-link">Log Out</a>
                                 </li>
                             {% else %}
@@ -43,10 +43,7 @@
                                 <li class="nav-item">
                                     <a href="{{ url_for('signup') }}" class="nav-link">Sign Up</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="{{ url_for('about_us') }}" class="nav-link">About Us</a>
-                                </li>
-
+                                
                             {% endif %}
                         </ul>
                     </div>
@@ -57,6 +54,8 @@
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
                         <li class="nav-item"><a href="#" class="nav-link text-warning"><b><i>Hebrew Calendar</i></b></a></li>
+                        <li class="nav-item"><a href="{{ url_for('about_us') }}" class="nav-link">About Us</a></li>
+
                     </ul>
                 </div>
             </nav>

@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <h1 class="mb-4 text-center text-primary"><b>Announcements</b></h1>
 
-            {% for post in posts %}
+            {% for post in posts.items %}
             <div class="card mb-4 shadow-sm">
                 <div class="card-header bg-light d-flex align-items-center">
                     <!-- Profile Picture -->
@@ -25,9 +25,16 @@
                     <p class="card-text">{{ post.content }}</p>
                 </div>
                 <div class="card-footer text-end bg-light">
-                    <a href="{{url_for('post', post_id=post.id)}}" class="btn btn-outline-primary btn-sm">Read more</a>
+                    <a href="{{url_for('post', post_id=post.id)}}" class="btn btn-outline-primary btn-sm">Update</a>
                 </div>
             </div>
+            {% endfor %}
+        </div>
+        <div>
+            {% for page_num in posts.iter_pages()%}
+                {% if page_num %}
+                    <a href="{{url_for('announcements', page=page_num)}}">{{ page_num }}</a>
+                {%endif %}
             {% endfor %}
         </div>
     </div>

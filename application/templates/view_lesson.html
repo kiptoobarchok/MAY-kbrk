@@ -11,6 +11,7 @@
     <p><strong>Conclusion:</strong> {{ lesson.conclusion }}</p>
 
     <div class="mt-4">
+        <b><a href="{{url_for('update_lesson', lesson_id=lesson.id)}}">Update Lesson</a></b> <br>
         <u><a href="{{ url_for('view_body', lesson_id=lesson.id) }}" class="btn btn-link">Questions and Answers</a></u> <br>
         <small><a href="{{ url_for('home') }}" class="btn btn-link">Home</a></small> <br>
         <small><a href="{{ url_for('add_content') }}" class="btn btn-link">Add Questions and Answers</a></small>

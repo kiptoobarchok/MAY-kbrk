@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">{{ title }}</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+            <label for="question" class="form-label">Question:</label>
+            {{ form.question(class="form-control", id="question") }}
+        </div>
+        <div class="mb-3">
+            <label for="answers" class="form-label">Answers:</label>
+            {{ form.answers(class="form-control", id="answers") }}
+        </div>
+        <div class="mb-3">
+            <label for="lesson_id" class="form-label">Lesson ID:</label>
+            {{ form.lesson_id(class="form-control", id="lesson_id") }}
+        </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+</div>
+
+{%endblock content%}

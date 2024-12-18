@@ -54,8 +54,9 @@ def logout():
 @app.route('/announcements')
 # @login_required
 def announcements():
-    posts=Announcement.query.all()
-    return render_template('announcements.html', title='Announcements page', posts=posts)
+    page = request.args.get('page', 1, type=int)
+    posts=Announcement.query.order_by(Announcement.date_posted.desc()).paginate(page=page, per_page=3)
+    return render_template('announcements.html', title='Announcements page', posts=posts , page=page)
 
 ## save picture
 def save_picture(form_picture):
@@ -158,7 +159,8 @@ def delete_post(post_id):
 @login_required  
 def lesson():
     # query all questions
-    lessons = Lesson.query.all()
+    page= request.args.get('page',1, type=int)
+    lessons = Lesson.query.order_by(Lesson.date_posted.desc()).paginate(page=page, per_page=2)
     return render_template('lesson.html', title='Lessons', lessons=lessons)
 
 
@@ -191,10 +193,61 @@ def add_content():
         db.session.commit()
         return redirect(url_for('lesson'))
     print('unsuccseful')
-    return render_template('add_content.html', title='view Lesson', form=form)
+    return render_template('add_content.html', title='Add Q and A', form=form)
 
 @app.route('/lesson/<int:lesson_id>/body', methods=['GET'])
 @login_required  
 def view_body(lesson_id):
-    body = Body.query.filter_by(lesson_id =lesson_id)
-    return render_template('view_body.html', title=f'Lesson {lesson_id} : Question and Answers' , body=body)
+    body = Body.query.get_or_404(lesson_id)
+    return render_template('view_body.html', title='Question and Answers' , body=body)
+
+## update lesson
+
+@app.route('/lesson/<int:lesson_id>/update', methods=['GET', 'POST'])
+@login_required  
+def update_lesson(lesson_id):
+    # Fetch the lesson from the database by its ID
+    lesson = Lesson.query.get_or_404(lesson_id)
+    form = AddLessonForm()
+    if form.validate_on_submit():
+        lesson.title = form.title.data
+        lesson.scripture_reading = form.scripture_reading.data
+        lesson.memory_verse = form.memory_verse.data
+        lesson.introduction = form.introduction.data
+        lesson.conclusion = form.conclusion.data
+        db.session.commit()
+        db.session.refresh(lesson)
+        print('update successful')
+        return redirect(url_for('lesson', lesson_id=lesson.id))
+    elif request.method == 'GET':
+        form.title.data = lesson.title
+        form.scripture_reading.data = lesson.scripture_reading
+        form.memory_verse.data = lesson.memory_verse
+        form.introduction.data = lesson.introduction
+        form.conclusion.data = lesson.conclusion
+    return render_template('update_lesson.html', title=lesson.title, lesson=lesson, form=form)
+
+@app.route('/lesson/<int:lesson_id>/body/update_body', methods=['GET', 'POST'])
+@login_required  
+def update_body(lesson_id):
+    body = Body.query.get_or_404(lesson_id)
+    form = AddBodyForm()
+    if form.validate_on_submit():
+        body.question = form.question.data
+        body.answers = form.answers.data
+        body.lesson_id = form.lesson_id.data
+        db.session.commit()
+        db.session.refresh(body)
+        return redirect(url_for('view_body', lesson_id=body.lesson_id))
+    elif request.method == 'GET':
+        form.question.data = body.question
+        form.answers.data = body.answers
+        form.lesson_id.data = body.lesson_id 
+    return render_template('update_body.html', title='Update Questions and Answers', body=body, form=form)
+
+## view all members
+@app.route('/users', methods=['GET'])
+@login_required
+def users():
+    users = User.query.all()
+    return render_template('users.html', title='Landing page', users=users)
