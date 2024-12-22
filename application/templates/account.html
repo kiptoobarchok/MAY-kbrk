@@ -1,71 +1,59 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<form action="" method="post" enctype="multipart/form-data">
-    <div class="container mt-5">
-    <div class="row justify-content-center">
-        <!-- Profile Card -->
-        <div class="col-md-8">
-            <div class="card shadow-sm border-0">
-                <div class="card-header text-center bg-primary text-white">
-                    <h3>Account Details</h3>
-                </div>
-                <!-- <p>{{ img_file }}</p> -->
-
-                <div class="card-body text-center">
-                    <!-- Profile Image -->
-                    <div class="mb-4">
-                        <img src="{{ img_file }}" alt="Profile profile" class="rounded-circle border" style="width: 150px; height: 150px; object-fit: cover;">
-                    </div>
-                    <h4 class="mb-2">{{ current_user.username }}</h4>
-                    <p class="text-muted">{{ current_user.email }}</p>
-                    <hr>
-
-                    <!-- Form for Updating Account Information -->
-                    <form method="POST" action="" class="border p-4 rounded shadow-sm" enctype="multipart/form-data ">
-                        {{ form.hidden_tag() }}
-                        <fieldset>
-                            <legend class="mb-4">Update Info</legend>
-                            <div class="mb-3">
-                                {{ form.email.label(class="form-label") }}
-                                {{ form.email(class="form-control") }}
-                                {% for error in form.email.errors %}
-                                    <div class="text-danger">[{{ error }}]</div>
-                                {% endfor %}
-                            </div>
-
-                            <div class="mb-3">
-                                {{ form.username.label(class="form-label") }}
-                                {{ form.username(class="form-control") }}
-                                {% for error in form.username.errors %}
-                                    <div class="text-danger">[{{ error }}]</div>
-                                {% endfor %}
-                            </div>
-                        </fieldset>
-
-                        <div class="text-center">
-                            {{ form.submit(class="btn btn-primary") }}
-                            <br>
-                            <a href="{{url_for('home')}}"><small>home</small></a>
-                        </div>
-
-                        <!-- Profile  Upload -->
-                        <div class="mt-4">
-                            {{ form.profile.label(class="form-label") }}
-                            {{ form.profile(class="form-control-file") }}
-                            {% if form.profile.errors %}
-                                {% for error in form.profile.errors %}
-                                    <div class="text-danger">[{{ error }}]</div>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+<div>
+  <img src="{{ image_file}}" alt="">
 </div>
+<form action="" method = POST enctype="multipart/form-data">
+  {{form.hidden_tag()}}
+  <div>
+      {{ form.firstname.label}} <br>
+      <b>{{ form.firstname }}</b>
+      {% for err in form.firstname.errors %}
+          <span style="color: brown;">[{{err}}]</span>
+      {% endfor %}
+  </div>
+  <div>
+    {{ form.lastname.label}} <br>
+    <b>{{ form.lastname }}</b>
+    {% for err in form.lastname.errors %}
+        <span style="color: brown;">[{{err}}]</span>
+    {% endfor %}
+</div>
+  <div>
+      {{ form.username.label}} <br>
+      {{ form.username }}
+      {% for err in form.username.errors %}
+          <span style="color: brown;">[{{err}}]</span>
+      {% endfor %}
+  </div>
+  <div>
+      {{ form.email.label}} <br>
+      {{ form.email }}
+      {% for err in form.email.errors %}
+          <span style="color: brown;">[{{err}}]</span>
+      {% endfor %}
+  </div> <br>
+  <div>
+      {{ form.profile.label() }}
+      {{ form.profile}} <br>
+      {% if form.profile.errors %}
+          {% for err in form.profile.errors %}
+              <span style="color: brown;">[{{ err }}]</span> <br>
+          {% endfor %}
+      {% endif  %}
+  </div>
+  <div>
+      {{form.submit}}
+  </div>
+  
 </form>
 
-
+<fieldset>
+  <legend>My posts</legend>
+  {% for announcement in announcements%}
+      <a href="{{url_for('announcements', announcement_id=announcement.id)}}"><span style="color: darkgreen;">[{{announcement}}]</span> <br></a>
+  {% endfor%}
+</fieldset>
+<small> <a href="{{url_for('home')}}">Home</a></small>
 {% endblock content %}

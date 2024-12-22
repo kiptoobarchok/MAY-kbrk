@@ -1,0 +1,21 @@
+{% extends "layout.html"%}
+
+{% block content %}
+
+    <!-- add an image  -->
+    <fieldset>
+        <i>{{ announcement.author.username }}</div></i><div>
+        <h5><u>{{announcement.title}}</u></h5>
+        <div><b>{{ announcement.content}}</b></div>
+        <div>{{ announcement.date_posted.strftime('%d/%m/%Y , %H:%M')}}</div> <br>
+
+        {% if announcement.author == current_user %}
+        <u><button><a href="{{url_for('update_announcement', announcement_id=announcement.id)}}">Update Announcement</a></button></u>
+        <button><a href="{{url_for('delete_announcement', announcement_id = announcement.id)}}">Delete Announcement</a></button> <br>
+        {% endif %}
+
+        <small><a href="{{url_for('announcements')}}">Announcements</a></small>
+    </fieldset>
+
+    
+{% endblock content %}

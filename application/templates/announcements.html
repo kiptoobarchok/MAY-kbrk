@@ -1,45 +1,31 @@
-{% extends "layout.html" %}
+{% extends "layout.html"%}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="mb-4 text-center text-primary"><b>Announcements</b></h1>
+    <fieldset>
+        <a href="{{url_for('create_announcement')}}"> Create Announcement</a> <br>
+        <a href="{{url_for('sabbath_schedule')}}">Sabbath Schedule</a>
+    </fieldset>
 
-            {% for post in posts.items %}
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header bg-light d-flex align-items-center">
-                    <!-- Profile Picture -->
-                    <img src="{{ url_for('static', filename='profile_pics/' + (post.author.img_file if post.author.img_file else 'default.jpg')) }}" 
-                         class="rounded-circle me-3" 
-                         style="width: 50px; height: 50px; object-fit: cover;">
+    <!-- add an image  -->
 
-                    <!-- Author and Date -->
-                    <div>
-                        <h5 class="mb-0"><b>{{ post.author.username }}</b></h5>
-                        <small class="text-muted">{{ post.date_posted.strftime('%d-%m-%Y') }}</small>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h4 class="card-title text-primary"><b>{{ post.title }}</b></h4>
-                    <p class="card-text">{{ post.content }}</p>
-                </div>
-                <div class="card-footer text-end bg-light">
-                    <a href="{{url_for('post', post_id=post.id)}}" class="btn btn-outline-primary btn-sm">Update</a>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+    {% for announcement in announcements %}
         <div>
-            {% for page_num in posts.iter_pages()%}
-                {% if page_num %}
-                    <a href="{{url_for('announcements', page=page_num)}}">{{ page_num }}</a>
-                {%endif %}
-            {% endfor %}
+            <fieldset>
+                <!-- url for updating post -->
+                <a href="{{url_for('show_announcement', announcement_id=announcement.id)}}"><u><b>{{ announcement.title }}</b></u><br></a>
+                <br>
+                <i>{{ announcement.content }} <br></i>
+                {{ announcement.author }} <br>
+                {{ announcement.date_posted.strftime('%d/%m/%Y , %H:%M')}}
+            </fieldset>
         </div>
+    {% endfor %}
+    <div>
+        {% for page_num in announcements.iter_pages()%}
+            {% if page_num %}
+                <a href="{{url_for('announcements', page=page_num)}}">{{ page_num }}</a>
+            {%endif %}
+        {% endfor %}
     </div>
-    <div class="text-center mt-4">
-        <a href="{{ url_for('home') }}" class="btn btn-link">Return Home</a>
-    </div>
-</div>
+    <footer><h5>><a href="{{url_for('home')}}">Home</a></h5></footer>
 {% endblock content %}

@@ -1,20 +1,31 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="container mt-5">
-    <h1 class="mb-4">{{ lesson.title }}</h1>
-    
-    <p><strong>Date:</strong> {{ lesson.date_posted }}</p>
+<div>
+    <fieldset>
+        <b><u><h3>{{lesson.id}}. {{ lesson.title }}</h3></u></b>
+
+    <p><strong>Date:</strong> {{ lesson.date_posted.strftime('%d/%m/%Y') }}</p>
     <p><strong>Scripture Reading:</strong> {{ lesson.scripture_reading }}</p>
     <p><strong>Memory Verse:</strong> {{ lesson.memory_verse }}</p>
-    <p><strong>Introduction:</strong> {{ lesson.introduction }}</p>
-    <p><strong>Conclusion:</strong> {{ lesson.conclusion }}</p>
+    <p><strong>Introduction:</strong> <br> {{ lesson.introduction }}</p>
+    <p><strong>Conclusion:</strong>  <br> {{ lesson.conclusion }}</p>
 
-    <div class="mt-4">
-        <b><a href="{{url_for('update_lesson', lesson_id=lesson.id)}}">Update Lesson</a></b> <br>
-        <u><a href="{{ url_for('view_body', lesson_id=lesson.id) }}" class="btn btn-link">Questions and Answers</a></u> <br>
-        <small><a href="{{ url_for('home') }}" class="btn btn-link">Home</a></small> <br>
-        <small><a href="{{ url_for('add_content') }}" class="btn btn-link">Add Questions and Answers</a></small>
-    </div>
+    </fieldset>
+        <div>
+            <u><a href="{{url_for('view_body', lesson_id=lesson.id)}}" >View Lesson</a></u> <br>
+            <small><a href="{{ url_for('home') }}">Home</a></small> <br>
+        </div>
+        <button><a href="#">Download Lesson</a></button> <br>
+        
+        <a href="{{url_for('update_lesson', lesson_id=lesson.id)}}">Update Lesson</a> <br>
+        <small><a href="{{url_for('add_content')}}">Add Questions and Answers</a></small>
+        <div>
+            <button><a href="{{url_for('delete_lesson', lesson_id=lesson.id)}}">Delete</a></button>
+        </div>
+    
+    
 </div>
+
+
 {% endblock content %}

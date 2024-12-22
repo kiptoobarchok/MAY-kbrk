@@ -1,0 +1,28 @@
+{% extends "layout.html"%}
+
+{% block content %}
+
+    <fieldset>
+        <a href="{{url_for('add_lesson')}}">Add Lesson</a>
+    </fieldset>
+
+    <fieldset>
+        {% for lesson in lessons %}
+            <a href="{{url_for('view_lesson', lesson_id=lesson.id)}}">{{ lesson }} - {{ lesson.date_posted.strftime('%d/%m/%Y')}}</a> <br>
+        {% endfor%}
+    </fieldset>
+    {% for page_num in lessons.iter_pages() %}
+            {% if page_num %}
+                <a href="{{url_for('lessons', page=page_num)}}">{{ page_num }}</a>
+            {% else %}
+            ...
+            {% endif%}
+        {% endfor %}
+
+    <small><h5><a href="{{url_for('home')}}">Home</a></h5></small>
+
+    <div>
+        <button><a href="#"></a>Download all lessons</button>
+    </div>
+    
+{% endblock content %}

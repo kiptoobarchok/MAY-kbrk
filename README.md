@@ -83,7 +83,7 @@ This project aims to design and develop comprehensive and user-friendly website 
 - **Backend**: Flask (Python)
 - **Frontend**: HTML, CSS, Bootstrap, jinja2
 - **Database**: SQLite
-- **Server**: Gunicorn for production deployment
+- **Server**: Gunicorn for production deployment  see <!-- nginx/Apache  -->
 - **Version Control**: Git
 
 ## Deployment

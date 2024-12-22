@@ -6,25 +6,29 @@
     <form method="POST">
         {{ form.hidden_tag() }}
         <div class="mb-3">
-            <label for="title" class="form-label">Title:</label>
+            <label for="title" class="form-label">Title:</label> <br>
             {{ form.title(class="form-control") }}
-        </div>
+        </div>  <br>
         <div class="mb-3">
-            <label for="scripture_reading" class="form-label">Scripture Reading:</label>
+            <label for="title" class="form-label">Date:</label> <br>
+            {{ form.date_posted(class="form-control") }}
+        </div>  <br>
+        <div class="mb-3">
+            <label for="scripture_reading" class="form-label">Scripture Reading:</label> <br>
             {{ form.scripture_reading(class="form-control") }}
-        </div>
+        </div> <br>
         <div class="mb-3">
-            <label for="memory_verse" class="form-label">Memory Verse:</label>
+            <label for="memory_verse" class="form-label">Memory Verse:</label> <br>
             {{ form.memory_verse(class="form-control") }}
-        </div>
+        </div> <br>
         <div class="mb-3">
-            <label for="introduction" class="form-label">Introduction:</label>
+            <label for="introduction" class="form-label">Introduction:</label> <br>
             {{ form.introduction(class="form-control") }}
-        </div>
+        </div><br>
         <div class="mb-3">
-            <label for="conclusion" class="form-label">Conclusion:</label>
+            <label for="conclusion" class="form-label">Conclusion:</label> <br>
             {{ form.conclusion(class="form-control") }}
-        </div>
+        </div> <br>
         <div class="mb-3">
             <button type="submit" class="btn btn-primary">Save Changes</button>
         </div>

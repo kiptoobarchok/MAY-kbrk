@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% if current_user.is_anonymous %}
+<li>
+  <a href="{{ url_for('login') }}">Log in</a>
+</li>
+
+<li>
+  <a href="{{ url_for('signup')}}">Sign Up</a>
+</li>
+
+<li>
+  <a href="{{ url_for('about_us')}}">About us</a>
+</li>
+
+{% else %}
+<li>
+  <a href="{{ url_for('logout')}}">Log out</a>
+</li>
+<li>
+  <a href="{{url_for('account')}}">Account</a>
+</li>
+<li>
+  <a href="{{url_for('members')}}">Members</a>
+</li>
+<li>
+  <a href="{{ url_for('about_us')}}">About us</a>
+</li>
+
+{% endif %}
+<li>
+  <a href="{{url_for('announcements')}}">Announcements</a>
+</li>
+
+<li>
+  <a href="{{url_for('lessons')}}">Lessons </a>
+</li>
+<li>
+  <a href="#">Event planner</a>
+</li>
+<li>
+  <a href="#">Hebrew Calendar</a>
+</li>
+
+{% endblock %}

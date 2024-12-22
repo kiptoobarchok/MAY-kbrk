@@ -1,0 +1,76 @@
+{% extends "layout.html"%}
+
+{% block content %}
+<fieldset>
+  <legend>Join Us Today...</legend>
+  <form action="" method="POST">
+  {{form.hidden_tag() }}
+  <div>
+    {{ form.firstname.label }} <br>
+    {{ form.firstname }}
+    {% for error in form.firstname.errors %}
+      <div> [{{ error }}]</div>
+    {% endfor%}
+  </div> <br>
+  <div>
+    {{ form.lastname.label }} <br>
+    {{ form.lastname }}
+    {% for error in form.lastname.errors %}
+      <div> [{{ error }}]</div>
+    {% endfor%}
+  </div> <br>
+  <div>
+    {{ form.email.label }} <br>
+    {{ form.email }}
+    {% for error in form.email.errors %}
+      <span style="color: brown;"> [{{ error }}]</span>
+    {% endfor%}
+  </div> <br>
+  <div>
+    {{ form.username.label }} <br>
+    {{ form.username }}
+    {% for error in form.username.errors %}
+      <div> [{{ error }}]</div>
+    {% endfor%}
+  </div> <br>
+  <div>
+    {{ form.date_of_birth.label }} <br>
+    {{ form.date_of_birth }}
+
+  </div> <br>
+  <div>
+    {{ form.role.label }} <br>
+    {{ form.role }}
+    {% for error in form.role.errors %}
+      <div> [{{ error }}]</div>
+    {% endfor%}
+  </div> <br>
+  <div>
+    {{ form.branch.label }} <br>
+    {{ form.branch }}
+    {% for error in form.branch.errors %}
+      <div> [{{ error }}]</div>
+    {% endfor%}
+  </div> <br>
+  <div>
+    {{ form.password.label }} <br>
+    {{ form.password }}
+    {% for error in form.password.errors %}
+      <div> [{{ error }}]</div>
+    {% endfor%}
+  </div> <br>
+  <div>
+    {{ form.confirm_password.label }} <br>
+    {{ form.confirm_password }}
+    {% for error in form.confirm_password.errors %}
+      <span style="color: brown;"> [{{ error }}]</span>
+    {% endfor%}
+  </div> <br>
+  <div> {{ form.submit }}</div>
+ </form>
+</fieldset>
+ 
+
+
+  <small><a href="{{url_for('home')}}">home</a></small>
+{% endblock content %}

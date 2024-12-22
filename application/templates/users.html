@@ -1,9 +1,0 @@
-{% extends "layout.html" %}
-
-{% block content %}
-<h4><u>Members</u></h4>
-{% for user in users %}
-    
-    <ol><li><div><i>[{{user.img_file}}] : {{ user.email}}</i></div></li></ol>
-{% endfor%}
-{% endblock content %}

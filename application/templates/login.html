@@ -1,0 +1,41 @@
+{% extends "layout.html"%}
+
+{% block content %}
+<fieldset>
+  <legend>MAY</legend>
+  <form action="" method="POST" novalidate>
+    {{ form.hidden_tag() }}
+  
+    <div>
+      {{ form.email.label }} <br>
+      {{ form.email }}
+      {% for error in form.email.errors %}
+        <div> <br>
+          [{{ error }}]
+        </div>
+      {% endfor %}
+    </div>
+    <div>
+      {{ form.password.label }} <br>
+      {{ form.password }}
+      {% for message in get_flashed_messages() %}
+        <span style="color: brown;">
+          [{{ message }}]
+        </div>
+      {% endfor %}
+    </div>
+    <div>
+      {{form.remember }}
+      {{form.remember.label }}
+    </div>
+  
+    <div> 
+      {{ form.submit }}
+    </div>
+    <div><small><a href="{{url_for('home')}}">back home</a></small></div>
+    <small>Join us Today? <a href="{{ url_for('signup') }}">Sign up</a></small>
+  
+  </form>
+</fieldset>
+
+{% endblock content %}

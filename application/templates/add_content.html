@@ -8,34 +8,34 @@
         {{ form.hidden_tag() }}
         
         <div class="mb-3">
-            <label for="question" class="form-label">{{ form.question.label }}</label>
+            <label for="question" class="form-label">{{ form.question.label }}</label> <br>
             {{ form.question(class="form-control") }}
             {% for err in form.question.errors %}
             <div class="text-danger">
                 <small>[{{ err }}]</small>
             </div>
             {% endfor %}
-        </div>
+        </div> <br>
         
         <div class="mb-3">
-            <label for="answers" class="form-label">{{ form.answers.label }}</label>
+            <label for="answers" class="form-label">{{ form.answers.label }}</label> <br>
             {{ form.answers(class="form-control") }}
             {% for err in form.answers.errors %}
             <div class="text-danger">
                 <small>[{{ err }}]</small>
             </div>
             {% endfor %}
-        </div>
+        </div> <br>
         
         <div class="mb-3">
-            <label for="lesson_id" class="form-label">{{ form.lesson_id.label }}</label>
+            <label for="lesson_id" class="form-label">{{ form.lesson_id.label }}</label> <br>
             {{ form.lesson_id(class="form-control") }}
             {% for err in form.lesson_id.errors %}
             <div class="text-danger">
                 <small>[{{ err }}]</small>
             </div>
             {% endfor %}
-        </div>
+        </div> <br>
         
         <div class="mb-3">
             {{ form.submit(class="btn btn-primary") }}
