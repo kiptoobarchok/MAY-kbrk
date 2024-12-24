@@ -1,65 +1,76 @@
-{% extends "layout.html"%}
+{% extends "layout.html" %}
 
 {% block content %}
+<div class="container mt-5">
+  <!-- Add Lesson Form -->
+  <fieldset>
+    <legend class="text-primary">Add Lesson</legend>
+    <form action="" method="POST" class="mt-4">
+      {{ form.hidden_tag() }}
 
-{% if current_user.role != admin %}
-<fieldset>
-        <legend>Add Lesson</legend>
-     <form action="" method="POST">
-        {{ form.hidden_tag() }}
+      <!-- Title Field -->
+      <div class="mb-3">
+        <label for="title" class="form-label">{{ form.title.label }}</label>
+        {{ form.title(class="form-control", id="title") }}
+        {% for err in form.title.errors %}
+        <small class="text-danger">[{{ err }}]</small>
+        {% endfor %}
+      </div>
 
-        <div>
-            {{ form.title.label }} <br>
-            {{ form.title }} 
-            {% for err in form.title.errors %}
-            <small>[{{ err }}]</small>
-            {% endfor%}
-        </div> <br>
-        <div>
-            {{ form.date_posted.label }} <br>
-            {{ form.date_posted }} 
-            {% for err in form.date_posted.errors %}
-            <small>[{{ err }}]</small>
-            {% endfor%}
-        </div> <br>
-        <div>
-            {{ form.introduction.label }} <br>
-            {{ form.introduction }}
-            {% for err in form.introduction.errors %}
-            <small>[{{ err }}]</small>
-            {% endfor%}
-        </div> <br>
-        <div>
-            {{ form.conclusion.label }} <br>
-            {{ form.conclusion }}
-            {% for err in form.conclusion.errors %}
-            <small>[{{ err }}]</small>
-            {% endfor%}
-        </div> <br>
-        <div>
-            {{ form.memory_verse.label }} <br>
-            {{ form.memory_verse }}
-            {% for err in form.memory_verse.errors %}
-            <small>[{{ err }}]</small>
-            {% endfor%}
-        </div> <br>
-        <div>
-            {{ form.scripture_reading.label }} <br>
-            {{ form.scripture_reading }}
-            {% for err in form.scripture_reading.errors %}
-            <small>[{{ err }}]</small>
-            {% endfor%}
-        </div> <br>
-        <div>
-            <button>{{ form.submit }}</button>
-        </div>
+      <!-- Date Posted Field -->
+      <div class="mb-3">
+        <label for="date_posted" class="form-label">{{ form.date_posted.label }}</label>
+        {{ form.date_posted(class="form-control", id="date_posted") }}
+        {% for err in form.date_posted.errors %}
+        <small class="text-danger">[{{ err }}]</small>
+        {% endfor %}
+      </div>
+
+      <!-- Introduction Field -->
+      <div class="mb-3">
+        <label for="introduction" class="form-label">{{ form.introduction.label }}</label>
+        {{ form.introduction(class="form-control", id="introduction") }}
+        {% for err in form.introduction.errors %}
+        <small class="text-danger">[{{ err }}]</small>
+        {% endfor %}
+      </div>
+
+      <!-- Conclusion Field -->
+      <div class="mb-3">
+        <label for="conclusion" class="form-label">{{ form.conclusion.label }}</label>
+        {{ form.conclusion(class="form-control", id="conclusion") }}
+        {% for err in form.conclusion.errors %}
+        <small class="text-danger">[{{ err }}]</small>
+        {% endfor %}
+      </div>
+
+      <!-- Memory Verse Field -->
+      <div class="mb-3">
+        <label for="memory_verse" class="form-label">{{ form.memory_verse.label }}</label>
+        {{ form.memory_verse(class="form-control", id="memory_verse") }}
+        {% for err in form.memory_verse.errors %}
+        <small class="text-danger">[{{ err }}]</small>
+        {% endfor %}
+      </div>
+
+      <!-- Scripture Reading Field -->
+      <div class="mb-3">
+        <label for="scripture_reading" class="form-label">{{ form.scripture_reading.label }}</label>
+        {{ form.scripture_reading(class="form-control", id="scripture_reading") }}
+        {% for err in form.scripture_reading.errors %}
+        <small class="text-danger">[{{ err }}]</small>
+        {% endfor %}
+      </div>
+
+      <!-- Submit Button -->
+      <div class="d-grid">
+        {{ form.submit(class="btn btn-primary") }}
+      </div>
     </form>
-   
-    </fieldset>
-
-{% endif%}
-    
-    
-    <small><b><a href="{{url_for('home')}}">Home</a></b></small>
-    
+  </fieldset>
+  <!-- Home Link -->
+  <div class="mt-4">
+    <a href="{{ url_for('home') }}" class="btn btn-outline-primary">Home</a>
+  </div>
+</div>
 {% endblock content %}

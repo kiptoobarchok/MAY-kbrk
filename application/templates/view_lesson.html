@@ -1,31 +1,40 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div>
-    <fieldset>
-        <b><u><h3>{{lesson.id}}. {{ lesson.title }}</h3></u></b>
+<div class="container py-4">
 
+  <!-- Lesson Title Section -->
+  <div class="mb-4">
+    <h3><u>{{ lesson.id }}. {{ lesson.title }}</u></h3>
+  </div>
+
+  <!-- Lesson Details -->
+  <fieldset class="mb-4 p-3 shadow-sm border rounded">
     <p><strong>Date:</strong> {{ lesson.date_posted.strftime('%d/%m/%Y') }}</p>
     <p><strong>Scripture Reading:</strong> {{ lesson.scripture_reading }}</p>
     <p><strong>Memory Verse:</strong> {{ lesson.memory_verse }}</p>
     <p><strong>Introduction:</strong> <br> {{ lesson.introduction }}</p>
-    <p><strong>Conclusion:</strong>  <br> {{ lesson.conclusion }}</p>
+    <p><strong>Conclusion:</strong> <br> {{ lesson.conclusion }}</p>
+  </fieldset>
 
-    </fieldset>
-        <div>
-            <u><a href="{{url_for('view_body', lesson_id=lesson.id)}}" >View Lesson</a></u> <br>
-            <small><a href="{{ url_for('home') }}">Home</a></small> <br>
-        </div>
-        <button><a href="#">Download Lesson</a></button> <br>
-        
-        <a href="{{url_for('update_lesson', lesson_id=lesson.id)}}">Update Lesson</a> <br>
-        <small><a href="{{url_for('add_content')}}">Add Questions and Answers</a></small>
-        <div>
-            <button><a href="{{url_for('delete_lesson', lesson_id=lesson.id)}}">Delete</a></button>
-        </div>
-    
-    
+  <!-- Action Buttons -->
+  <div class="mb-3">
+    <a href="{{ url_for('view_body', lesson_id=lesson.id) }}" class="btn btn-info me-2">View Lesson</a>
+    <a href="{{ url_for('update_lesson', lesson_id=lesson.id) }}" class="btn btn-warning me-2">Update Lesson</a>
+    <a href="{{ url_for('delete_lesson', lesson_id=lesson.id) }}" class="btn btn-danger me-2" onclick="return confirm('Are you sure you want to delete this lesson?')">Delete</a>
+    <a href="{{ url_for('add_content') }}" class="btn btn-primary">Add Questions and Answers</a>
+  </div>
+
+  <!-- Download Button -->
+  <div class="mb-3">
+    <button class="btn btn-outline-secondary"><a href="#" class="text-decoration-none text-dark">Download Lesson</a></button>
+  </div>
+   <!-- Navigation -->
+  <div class="text-center mt-4">
+    <small><a href="{{ url_for('home') }}" class="btn btn-outline-primary">Back to Home</a></small>
+  </div>
+
+   
+
 </div>
-
-
 {% endblock content %}

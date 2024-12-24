@@ -1,59 +1,100 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div>
-  <img src="{{ image_file}}" alt="">
-</div>
-<form action="" method = POST enctype="multipart/form-data">
-  {{form.hidden_tag()}}
-  <div>
-      {{ form.firstname.label}} <br>
-      <b>{{ form.firstname }}</b>
-      {% for err in form.firstname.errors %}
-          <span style="color: brown;">[{{err}}]</span>
-      {% endfor %}
+<div class="container py-5">
+  <!-- Account Header Section -->
+  <div class="text-center mb-4">
+    <h1 class="display-5">My Account</h1>
+    <p class="text-muted">Manage your profile and settings</p>
   </div>
-  <div>
-    {{ form.lastname.label}} <br>
-    <b>{{ form.lastname }}</b>
-    {% for err in form.lastname.errors %}
-        <span style="color: brown;">[{{err}}]</span>
-    {% endfor %}
-</div>
-  <div>
-      {{ form.username.label}} <br>
-      {{ form.username }}
-      {% for err in form.username.errors %}
-          <span style="color: brown;">[{{err}}]</span>
-      {% endfor %}
-  </div>
-  <div>
-      {{ form.email.label}} <br>
-      {{ form.email }}
-      {% for err in form.email.errors %}
-          <span style="color: brown;">[{{err}}]</span>
-      {% endfor %}
-  </div> <br>
-  <div>
-      {{ form.profile.label() }}
-      {{ form.profile}} <br>
-      {% if form.profile.errors %}
-          {% for err in form.profile.errors %}
-              <span style="color: brown;">[{{ err }}]</span> <br>
-          {% endfor %}
-      {% endif  %}
-  </div>
-  <div>
-      {{form.submit}}
-  </div>
-  
-</form>
 
-<fieldset>
-  <legend>My posts</legend>
-  {% for announcement in announcements%}
-      <a href="{{url_for('announcements', announcement_id=announcement.id)}}"><span style="color: darkgreen;">[{{announcement}}]</span> <br></a>
-  {% endfor%}
-</fieldset>
-<small> <a href="{{url_for('home')}}">Home</a></small>
+  <!-- Profile Picture and Information -->
+  <div class="row align-items-center mb-5">
+    <div class="col-md-3 text-center">
+      <img src="{{ image_file }}" alt="Profile Picture" class="img-thumbnail rounded-circle" style="max-width: 150px;">
+    </div>
+    <div class="col-md-9">
+      <h4>{{ form.firstname.data }} {{ form.lastname.data }}</h4>
+      <p class="text-secondary mb-1">Username: {{ form.username.data }}</p>
+      <p class="text-secondary">Email: {{ form.email.data }}</p>
+      <button class="btn btn-primary btn-sm">Edit Profile</button>
+    </div>
+  </div>
+
+  <!-- Profile Update Form -->
+  <form action="" method="POST" enctype="multipart/form-data" class="bg-light p-4 rounded shadow-sm">
+    {{ form.hidden_tag() }}
+    <h4 class="mb-4">Update Profile</h4>
+
+    <!-- First Name -->
+    <div class="mb-3">
+      {{ form.firstname.label }} <br>
+      {{ form.firstname(class_="form-control") }}
+      {% for err in form.firstname.errors %}
+        <div class="text-danger small">[{{ err }}]</div>
+      {% endfor %}
+    </div>
+
+    <!-- Last Name -->
+    <div class="mb-3">
+      {{ form.lastname.label }} <br>
+      {{ form.lastname(class_="form-control") }}
+      {% for err in form.lastname.errors %}
+        <div class="text-danger small">[{{ err }}]</div>
+      {% endfor %}
+    </div>
+
+    <!-- Username -->
+    <div class="mb-3">
+      {{ form.username.label }} <br>
+      {{ form.username(class_="form-control") }}
+      {% for err in form.username.errors %}
+        <div class="text-danger small">[{{ err }}]</div>
+      {% endfor %}
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+      {{ form.email.label }} <br>
+      {{ form.email(class_="form-control") }}
+      {% for err in form.email.errors %}
+        <div class="text-danger small">[{{ err }}]</div>
+      {% endfor %}
+    </div>
+
+    <!-- Profile Picture Upload -->
+    <div class="mb-3">
+      {{ form.profile.label }} <br>
+      {{ form.profile(class_="form-control") }}
+      {% for err in form.profile.errors %}
+        <div class="text-danger small">[{{ err }}]</div>
+      {% endfor %}
+    </div>
+
+    <!-- Submit Button -->
+    <div>
+      {{ form.submit(class_="btn btn-success") }}
+    </div>
+  </form>
+
+  <!-- Announcements Section -->
+  <div class="mt-5">
+    <h4>My Announcements</h4>
+    <ul class="list-group">
+      {% for announcement in announcements %}
+        <li class="list-group-item">
+          <a href="{{ url_for('announcements', announcement_id=announcement.id) }}" class="text-decoration-none text-primary">
+            {{ announcement.title }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Navigation Links -->
+  <div class="mt-4">
+    <a href="{{ url_for('home') }}" class="btn btn-outline-secondary me-2">Back to Home</a>
+    <a href="{{ url_for('logout') }}" class="btn btn-outline-danger">Logout</a>
+  </div>
+</div>
 {% endblock content %}

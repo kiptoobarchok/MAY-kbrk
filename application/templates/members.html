@@ -1,30 +1,68 @@
-{% extends "layout.html"%}
+{% extends "layout.html" %}
 
 {% block content %}
-<fieldset>
-    <a href="{{url_for('pastor')}}"> Pastor</a>
-</fieldset>
-<fieldset>
-    <legend>Members of Messianic Assembly</legend>
-    {% for member in members%}
+<div class="container py-5">
+  <!-- Page Header -->
+  <div class="text-center mb-4">
+    <h1 class="display-6">Members of Messianic Assembly</h1>
+    <p class="text-muted">Explore our community and leadership</p>
+  </div>
 
-    <ol>
-        <div>
-            <span style="color: darkgreen;">{{member}}</span> 
-        </div> <br>
-    </ol>
-        
-    {% endfor %}
-    
-      
-</fieldset>
-    {% for page_num in members.iter_pages() %}
-        {% if page_num %}
-            <a href="{{url_for('members', page=page_num)}}">{{ page_num }}</a> <br>
-        {% else %}
-            ...
-        {% endif%}
-    {% endfor %}
+  <!-- Pastor Section -->
+  <div class="text-center mb-4">
+    <a href="{{ url_for('Pastor') }}" class="btn btn-primary">
+      Meet our Resident Pastor
+    </a>
+  </div>
 
-    <button><small><a href="{{url_for('home')}}">Home</a></small></button> 
-{% endblock content%}
+  <!-- Members List -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-primary text-white">
+      <h5>Community Members</h5>
+    </div>
+    <div class="card-body">
+      {% if members %}
+        <ul class="list-group">
+          {% for member in members %}
+            <li class="list-group-item d-flex align-items-center">
+              <!-- Profile Picture -->
+              <img src="{{ member.profile_picture_url or url_for('static', filename='profile_pics/' + member.image_file) }}" 
+                   alt="{{ member }}'s Profile Picture" 
+                   class="rounded-circle me-3" 
+                   style="width: 50px; height: 50px; object-fit: cover;">
+              <!-- Member Name -->
+              <span class="text-success"><a href="#">{{ member.firstname }} {{ member.lastname }}</a> - {{member.branch}}, {{ member.role}}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-muted">No members found.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  {% if members.iter_pages() %}
+    <nav aria-label="Members Pagination">
+      <ul class="pagination justify-content-center">
+        {% for page_num in members.iter_pages() %}
+          {% if page_num %}
+            <li class="page-item {% if page_num == members.page %}active{% endif %}">
+              <a class="page-link" href="{{ url_for('members', page=page_num) }}">{{ page_num }}</a>
+            </li>
+          {% else %}
+            <li class="page-item disabled">
+              <span class="page-link">...</span>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
+  {% endif %}
+
+  <!-- Navigation Back to Home -->
+  <div class="text-center mt-4">
+    <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">Back to Home</a>
+  </div>
+</div>
+{% endblock content %}

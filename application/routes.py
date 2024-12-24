@@ -1,11 +1,14 @@
-from application import app, db, bcrypt
+from application import app, db, bcrypt, mail
 from flask import render_template, url_for, redirect, flash, request, abort
-from application.forms import LoginForm, SignupForm, UpdateAccountForm, CreateAnnouncementForm,UpdateAnnouncementForm ,AddLessonForm, AddBodyForm
+from application.forms import (LoginForm, SignupForm, UpdateAccountForm,
+                              CreateAnnouncementForm,UpdateAnnouncementForm ,
+                              AddLessonForm, AddBodyForm,ResetPasswordForm, RequestResetForm)
 from application.models import User,Announcement, Lesson, Body
 from flask_login import current_user, login_user, login_required, logout_user
 import secrets, os, time
 from PIL import Image
 from flask import current_app
+from flask_mail import Message
 
 
 @app.route('/')
@@ -68,7 +71,7 @@ def save_picture(form_picture, old_picture):
   i.thumbnail(output_size)
   i.save(picture_path)
 
-## delete old picture if its not default
+## delete old picture from the db if its not default
   if old_picture != 'default.png':
     old_picture_path = os.path.join(current_app.root_path, 'static/profile_pics', old_picture)
     if os.path.exists(old_picture_path):
@@ -194,7 +197,7 @@ def lessons():
 
 
 @app.route('/add_lesson', methods=['GET', 'POST'])
-@login_required  
+@login_required
 def add_lesson():
     if current_user.role != 'admin':
       abort(403)
@@ -308,8 +311,9 @@ def members():
 
 @app.route('/members/pastor', methods=['GET'])
 @login_required  
-def pastor():
-  return render_template('pastor.html', title='Pastor\'s')
+def Pastor():
+  pastor = User.query.filter_by(role='pastor').first()
+  return render_template('pastor.html', title='Pastor\'s', pastor=pastor)
 
 ## should have's
 
@@ -317,3 +321,44 @@ def pastor():
 @login_required  
 def sabbath_schedule():
   return render_template('sabbath_schedule.html', title='Sabbath Schedule')
+
+
+
+def send_reset_email(user):
+  token = user.generate_reset_token()
+  msg = Message('Password Reset Request', sender='kiptoobarchok8032@gmail.com',
+                recipients=[user.email])
+  msg.body=f'''To reset your password, visit the following link:
+{url_for('reset_token', token=token, _external=True)}
+If you did not make this request simply ignore this email and no change will be made
+'''
+  mail.send(msg)
+
+
+@app.route('/reset_password', methods=['GET', 'POST'])
+def reset_request():
+  form = RequestResetForm()
+  if  current_user.is_authenticated:
+    return redirect(url_for('home'))
+  if form.validate_on_submit():
+    user = User.query.filter_by(email=form.email.data).first_or_404()
+    send_reset_email(user)
+    flash('an email with instructions to reset your password has been sent to your email')
+  return render_template('reset_request.html', title='Request Reset Token', form=form)
+
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_token(token):
+  if  current_user.is_authenticated:
+    return redirect(url_for('home'))
+  
+  user = User.verify_reset_token(token)
+  if not user:
+    flash('Invalid or exprired token')
+    return redirect(url_for('reset_request'))
+  form = ResetPasswordForm()
+  if form.validate_on_submit():
+    hashed_password = bcrypt.generate_password_hash(form.password.data)
+    user.password = hashed_password
+    db.session.commit()
+    return redirect(url_for('login'))
+  return render_template('reset_token.html', title='Request Reset Token', form=form)

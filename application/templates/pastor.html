@@ -1,5 +1,38 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <p>pastor's profile</p>
-{% endblock%}
+<div class="container py-5">
+  <!-- Page Header -->
+  <div class="text-center mb-4">
+    <h1 class="display-6">Resident Pastor</h1>
+    <p class="text-muted">Shallom Brethren</p>
+  </div>
+
+    <div class="card-body">
+        <ul class="list-group">
+          {% if pastor %}
+            
+            <li class="list-group-item d-flex align-items-center">
+              <!-- Profile Picture -->
+              <img src="{{ pastor.profile_picture_url or url_for('static', filename='profile_pics/' + pastor.image_file) }}" 
+                   alt="{{ pastor }}'s Profile Picture" 
+                   class="rounded-circle me-3" 
+                   style="width: 50px; height: 50px; object-fit: cover;">
+              <!-- p Name -->
+              <span class="text-success"><a href="https://wa.me/+254721544385">{{ pastor.firstname }} {{ pastor.lastname }}</a> - {{pastor.branch}}</span>
+            </li>
+          {% else %}
+            <span>
+                <p>Our pastor has not signed up yet</p>
+            </span>
+            {% endif%}
+        </ul>
+    </div>
+  </div>
+
+  <!-- Navigation Back to Home -->
+  <div class="text-center mt-4">
+    <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">Back to Home</a>
+  </div>
+</div>
+{% endblock content %}

@@ -1,21 +1,46 @@
 {% extends "layout.html"%}
 
 {% block content %}
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <!-- Author Information -->
+      <div class="d-flex align-items-center mb-3">
+        <img
+          src="{{ url_for('static', filename='profile_pics/' + announcement.author.image_file) }}"
+          alt="Author's profile picture"
+          class="rounded-circle"
+          style="width: 50px; height: 50px; object-fit: cover;"
+        >
+        <div class="ms-3">
+          <h6 class="mb-0">{{ announcement.author.firstname }} {{announcement.author.lastname}}</h6>
+          <small class="text-muted">{{ announcement.date_posted.strftime('%d/%m/%Y , %H:%M') }}</small>
+        </div>
+      </div>
 
-    <!-- add an image  -->
-    <fieldset>
-        <i>{{ announcement.author.username }}</div></i><div>
-        <h5><u>{{announcement.title}}</u></h5>
-        <div><b>{{ announcement.content}}</b></div>
-        <div>{{ announcement.date_posted.strftime('%d/%m/%Y , %H:%M')}}</div> <br>
+      <!-- Announcement Title -->
+      <h3 class="card-title text-primary"><u>{{ announcement.title }}</u></h3>
 
-        {% if announcement.author == current_user %}
-        <u><button><a href="{{url_for('update_announcement', announcement_id=announcement.id)}}">Update Announcement</a></button></u>
-        <button><a href="{{url_for('delete_announcement', announcement_id = announcement.id)}}">Delete Announcement</a></button> <br>
-        {% endif %}
+      <!-- Announcement Content -->
+      <p class="card-text">{{ announcement.content }}</p>
 
-        <small><a href="{{url_for('announcements')}}">Announcements</a></small>
-    </fieldset>
+      <!-- Buttons for Edit/Delete -->
+      {% if announcement.author == current_user %}
+      <div class="d-flex gap-2">
+        <a href="{{ url_for('update_announcement', announcement_id=announcement.id) }}" class="btn btn-warning">
+          Update Announcement
+        </a>
+        <a href="{{ url_for('delete_announcement', announcement_id=announcement.id) }}" class="btn btn-danger">
+          Delete Announcement
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
 
-    
+  <!-- Back to Announcements Link -->
+  <div class="text-center mt-4">
+    <a href="{{ url_for('announcements') }}" class="btn btn-outline-secondary">Back to Announcements</a>
+  </div>
+</div>
 {% endblock content %}

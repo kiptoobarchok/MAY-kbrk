@@ -30,6 +30,7 @@ class SignupForm(FlaskForm):
                                             ('zimmerman', 'ZIMMERMAN'),
                                             ('mwiki', 'MWIKI'),
                                             ('isebania','ISEBANIA'),
+                                            ('nyabangi', 'NYABANGI'),
                                             ('diaspora', 'DIASPORA'),
                                             ('other', 'OTHER')],              
                          validators=[DataRequired()])
@@ -98,3 +99,19 @@ class UpdateAnnouncementForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     content = TextAreaField('Announcement')
     post = SubmitField('Update Announcement')
+
+
+class RequestResetForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Request Password Reset')
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if not user:
+            raise ValidationError('There is no account with that email. You must register first')
+        
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password', message='The passwords must match')])
+    submit =SubmitField('Reset Password')

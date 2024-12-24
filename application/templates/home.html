@@ -1,47 +1,98 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<div class="d-flex flex-column min-vh-100">
+  <!-- Navbar Section -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">Messianic Assembly of Yahweh</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          {% if current_user.is_anonymous %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('login') }}">Log in</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('signup') }}">Sign Up</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('about_us') }}">About us</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('logout') }}">Log out</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('account') }}">Account</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('members') }}">Members</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('about_us') }}">About us</a>
+            </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('announcements') }}">Announcements</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('lessons') }}">Lessons</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Hebrew Calendar</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-{% if current_user.is_anonymous %}
-<li>
-  <a href="{{ url_for('login') }}">Log in</a>
-</li>
+  <!-- Content Section -->
+  <div class="container py-4 flex-grow-1">
+    <!-- Header Section -->
+    <div class="text-center mb-4">
+      <img src="{{ url_for('static', filename='images/church.jpeg') }}" alt="Church Banner" class="img-fluid rounded">
+    </div>
 
-<li>
-  <a href="{{ url_for('signup')}}">Sign Up</a>
-</li>
+    <!-- Motto, Vision, and Weekly Verse Section -->
+    <div class="row text-center mb-4">
+      <div class="col-md-4">
+        <h3>Motto</h3>
+        <p>"Placeholder for Church Motto"</p>
+      </div>
+      <div class="col-md-4">
+        <h3>Vision</h3>
+        <p>"Placeholder for Church Vision"</p>
+      </div>
+      <div class="col-md-4">
+        <h3>Weekly Verse</h3>
+        <p>"Placeholder for Weekly Verse"</p>
+      </div>
+    </div>
 
-<li>
-  <a href="{{ url_for('about_us')}}">About us</a>
-</li>
+    <!-- Social Media Links -->
+    <div class="text-center mb-4">
+      <h3>Follow Us on</h3>
+      <div class="d-flex justify-content-center gap-3">
+        <a href="#" class="text-primary fs-4">Facebook<i class="bi bi-facebook"></i></a>
+        <a href="#" class="text-info fs-4"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="text-danger fs-4"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="text-success fs-4"><i class="bi bi-whatsapp"></i></a>
+      </div>
+    </div>
 
-{% else %}
-<li>
-  <a href="{{ url_for('logout')}}">Log out</a>
-</li>
-<li>
-  <a href="{{url_for('account')}}">Account</a>
-</li>
-<li>
-  <a href="{{url_for('members')}}">Members</a>
-</li>
-<li>
-  <a href="{{ url_for('about_us')}}">About us</a>
-</li>
+    <!-- MPesa Donations Section -->
+    <div class="text-center p-4 rounded bg-success text-white mb-4">
+      <h3>For Donations, Offerings, and Tithes</h3>
+      <p>Till Number: <span class="fw-bold">123456</span></p>
+    </div>
+  </div>
 
-{% endif %}
-<li>
-  <a href="{{url_for('announcements')}}">Announcements</a>
-</li>
-
-<li>
-  <a href="{{url_for('lessons')}}">Lessons </a>
-</li>
-<li>
-  <a href="#">Event planner</a>
-</li>
-<li>
-  <a href="#">Hebrew Calendar</a>
-</li>
-
+  <!-- Footer Section -->
+  <footer class="text-center bg-light py-3 mt-auto">
+    <small>&copy; 2024 MAY. All Rights Reserved.</small>
+  </footer>
+</div>
 {% endblock %}
