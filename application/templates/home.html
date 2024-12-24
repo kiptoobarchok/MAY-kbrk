@@ -3,47 +3,26 @@
 {% block content %}
 <div class="d-flex flex-column min-vh-100">
   <!-- Navbar Section -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
     <div class="container">
-      <a class="navbar-brand" href="#">Messianic Assembly of Yahweh</a>
+      <a class="navbar-brand fw-bold" href="#">Messianic Assembly of Yahweh</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           {% if current_user.is_anonymous %}
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('login') }}">Log in</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('signup') }}">Sign Up</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('about_us') }}">About us</a>
-            </li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Log in</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('signup') }}">Sign Up</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('about_us') }}">About Us</a></li>
           {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('logout') }}">Log out</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('account') }}">Account</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('members') }}">Members</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('about_us') }}">About us</a>
-            </li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Log out</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('account') }}">Account</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('members') }}">Members</a></li>
           {% endif %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('announcements') }}">Announcements</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('lessons') }}">Lessons</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Hebrew Calendar</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('announcements') }}">Announcements</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('lessons') }}">Lessons</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Hebrew Calendar</a></li>
         </ul>
       </div>
     </div>
@@ -53,46 +32,108 @@
   <div class="container py-4 flex-grow-1">
     <!-- Header Section -->
     <div class="text-center mb-4">
-      <img src="{{ url_for('static', filename='images/church.jpeg') }}" alt="Church Banner" class="img-fluid rounded">
+      <img src="{{ url_for('static', filename='images/church.jpeg') }}" alt="Church Banner" class="img-fluid rounded shadow">
     </div>
 
-    <!-- Motto, Vision, and Weekly Verse Section -->
     <div class="row text-center mb-4">
+      <!-- Motto Card -->
       <div class="col-md-4">
-        <h3>Motto</h3>
-        <p>"Placeholder for Church Motto"</p>
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-warning text-white fw-bold">
+            Motto
+          </div>
+          <div class="card-body">
+            <p class="card-text">WE LOVE WHAT YAHWEH LOVES,<br>AND HATES WHAT HE HATES</p>
+          </div>
+          <div class="card-footer bg-light">
+            <small class="text-muted">Guiding Principle for All Believers</small>
+          </div>
+        </div>
       </div>
+    
+      <!-- Creed Card -->
       <div class="col-md-4">
-        <h3>Vision</h3>
-        <p>"Placeholder for Church Vision"</p>
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-success text-white fw-bold">
+            OUR CREED
+          </div>
+          <div class="card-body">
+            <p class="card-text">HERE IS THE PATIENCE OF THE SAINTS, HERE ARE THOSE<br>
+              WHO KEEP THE COMMANDMENTS OF YAHWEH AND THE FAITH OF YAHSHUA THE MESSIAH.<br>
+              <strong>REVELATIONS 14:12</strong>
+            </p>
+          </div>
+          <div class="card-footer bg-light">
+            <small class="text-muted">A Verse to Live By</small>
+          </div>
+        </div>
       </div>
+    
+      <!-- Weekly Verse Card -->
       <div class="col-md-4">
-        <h3>Weekly Verse</h3>
-        <p>"Placeholder for Weekly Verse"</p>
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-info text-white fw-bold">
+            Weekly Verse
+          </div>
+          <div class="card-body">
+            <p class="card-text">"Study to show yourself approved to YAHWEH, a workman that needs not to be ashamed, rightly dividing the word of truth."</p>
+            <i><b>2 Tim. 2:15</b></i>
+          </div>
+          <div class="card-footer bg-light">
+            <small class="text-muted">Inspiration for the Week</small>
+          </div>
+        </div>
       </div>
     </div>
-
-    <!-- Social Media Links -->
-    <div class="text-center mb-4">
-      <h3>Follow Us on</h3>
-      <div class="d-flex justify-content-center gap-3">
-        <a href="#" class="text-primary fs-4">Facebook<i class="bi bi-facebook"></i></a>
-        <a href="#" class="text-info fs-4"><i class="bi bi-twitter"></i></a>
-        <a href="#" class="text-danger fs-4"><i class="bi bi-instagram"></i></a>
-        <a href="#" class="text-success fs-4"><i class="bi bi-whatsapp"></i></a>
-      </div>
-    </div>
+    
 
     <!-- MPesa Donations Section -->
-    <div class="text-center p-4 rounded bg-success text-white mb-4">
+    <div class="text-center p-4 rounded bg-success text-white mb-4 shadow">
       <h3>For Donations, Offerings, and Tithes</h3>
       <p>Till Number: <span class="fw-bold">123456</span></p>
     </div>
   </div>
 
   <!-- Footer Section -->
-  <footer class="text-center bg-light py-3 mt-auto">
-    <small>&copy; 2024 MAY. All Rights Reserved.</small>
+  <footer class="text-center bg-dark text-white py-4 shadow-lg mt-auto">
+    <div class="container">
+      <!-- Footer Links -->
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <h5 class="text-warning">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="{{ url_for('home') }}" class="text-white text-decoration-none">Home</a></li>
+            <li><a href="{{ url_for('announcements') }}" class="text-white text-decoration-none">Announcements</a></li>
+            <li><a href="{{ url_for('lessons') }}" class="text-white text-decoration-none">Lessons</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5 class="text-success">Follow Us</h5>
+          <div class="d-flex justify-content-center gap-3">
+            <a href="https://web.facebook.com/messianiczimmerman/?_rdc=1&_rdr" class="text-white text-decoration-none">
+              <img src="{{ url_for('static', filename='Icons/facebook.png') }}" alt="Facebook" width="30">
+            </a>
+            <a href="#" class="text-white text-decoration-none">
+              <img src="{{ url_for('static', filename='Icons/twitter.png') }}" alt="Twitter" width="30">
+            </a>
+            <a href="https://www.youtube.com/@M.A.Y.ZIMMERMAN" class="text-white text-decoration-none">
+              <img src="{{ url_for('static', filename='Icons/youtube.png') }}" alt="YouTube" width="30">
+            </a>
+            <a href="#" class="text-white text-decoration-none">
+              <img src="{{ url_for('static', filename='Icons/whatsapp.png') }}" alt="WhatsApp" width="30">
+            </a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h5 class="text-info">Contact Us</h5>
+          <p>Email: <a href="mailto:info@may.org" class="text-white text-decoration-none">info@mayministries.org</a></p>
+          <p>Phone: <span class="text-white">+254 743 248 407</span></p>
+        </div>
+      </div>
+      <!-- Footer Copyright -->
+      <small class="d-block">&copy; 2024 Messianic Assembly of Yahweh. All Rights Reserved.</small>
+    </div>
   </footer>
+  
 </div>
 {% endblock %}
