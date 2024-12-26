@@ -90,7 +90,7 @@
     <!-- MPesa Donations Section -->
     <div class="text-center p-4 rounded bg-success text-white mb-4 shadow">
       <h3>For Donations, Offerings, and Tithes</h3>
-      <p>PAYBILL NUMBER: <span class="fw-bold">247247</span></p>
+      <p>PAYBILL Number: <span class="fw-bold">247247</span></p>
       <p>ACCOUNT NUMBER: <span class="fw-bold">608379</span></p>
     </div>
   </div>
