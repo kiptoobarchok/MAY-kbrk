@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Add Event</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.month.label(class="form-label") }}
+                {{ form.month(class="form-control") }}
+                {% for error in form.month.errors %}
+                <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+            <div class="mb-3">
+                {{ form.event_date.label(class="form-label") }}
+                {{ form.event_date(class="form-control") }}
+                {% for error in form.event_date.errors %}
+                <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+            <div class="mb-3">
+                {{ form.event_desc.label(class="form-label") }}
+                {{ form.event_desc(class="form-control") }}
+                {% for error in form.event_desc.errors %}
+                <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+            <div class="mb-3">
+                {{ form.event_venue.label(class="form-label") }}
+                {{ form.event_venue(class="form-control") }}
+                {% for error in form.event_venue.errors %}
+                <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+            <div class="mb-3">
+                {{ form.event_status.label(class="form-label") }}
+                {{ form.event_status(class="form-control") }}
+                {% for error in form.event_status.errors %}
+                <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+            <div class="mb-3">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+    </div>
+    <div class="text-end mb-3">
+        <a href="{{ url_for('events') }}" class="btn btn-primary">All Events</a>
+    </div>
+</body>
+{% endblock content%}
+

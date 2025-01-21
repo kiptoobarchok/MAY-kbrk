@@ -2,8 +2,8 @@ from application import app, db, bcrypt, mail
 from flask import render_template, url_for, redirect, flash, request, abort
 from application.forms import (LoginForm, SignupForm, UpdateAccountForm,
                               CreateAnnouncementForm,UpdateAnnouncementForm ,
-                              AddLessonForm, AddBodyForm,ResetPasswordForm, RequestResetForm)
-from application.models import User,Announcement, Lesson, Body
+                              AddLessonForm, AddBodyForm,ResetPasswordForm, RequestResetForm, EventCreationForm)
+from application.models import User,Announcement, Lesson, Body, Event
 from flask_login import current_user, login_user, login_required, logout_user
 import secrets, os, time
 from PIL import Image
@@ -72,7 +72,7 @@ def save_picture(form_picture, old_picture):
   i.save(picture_path)
 
 ## delete old picture from the db if its not default
-  if old_picture != 'default.png':
+  if old_picture != 'default.jpg':
     old_picture_path = os.path.join(current_app.root_path, 'static/profile_pics', old_picture)
     if os.path.exists(old_picture_path):
       os.remove(old_picture_path)
@@ -313,6 +313,9 @@ def members():
 @login_required  
 def Pastor():
   pastor = User.query.filter_by(role='pastor').first()
+  # if p.branch == 'kaborok':
+  #   p = _pstr
+  # pastor = p
   return render_template('pastor.html', title='Pastor\'s', pastor=pastor)
 
 ## should have's
@@ -362,3 +365,39 @@ def reset_token(token):
     db.session.commit()
     return redirect(url_for('login'))
   return render_template('reset_token.html', title='Request Reset Token', form=form)
+
+@app.route('/events', methods=['POST', 'GET'])
+def events():
+  # query to fetch al events from the database
+  events = Event.query.order_by(Event.event_date.asc()).all()
+  return render_template('events.html', events=events, title='Events')
+
+
+@app.route('/add_event', methods=['GET', 'POST'])
+@login_required  
+def add_event():
+  form = EventCreationForm()
+  if form.validate_on_submit():
+     # Create a new event object
+    event = Event(month=form.month.data,
+                  event_date=form.event_date.data,
+                  event_desc=form.event_desc.data,
+                  event_venue=form.event_venue.data,
+                  event_status=form.event_status.data
+                )
+    db.session.add(event)
+    db.session.commit()
+    print('event added to the database')
+    return redirect(url_for('add_event')) 
+  return render_template('add_event.html', title='Events', form=form)
+
+
+@app.route('/update/<int:event_id>', methods=['GET', 'POST'])
+def update_event(event_id):
+    # Logic for updating an event
+    pass
+
+@app.route('/delete/<int:event_id>', methods=['POST', 'GET'])
+def delete_event(event_id):
+    # Logic for deleting an event
+    pass

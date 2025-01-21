@@ -1,0 +1,61 @@
+{% extends "layout.html"  %}
+
+{% block content %}
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Upcoming Events For Year 2024/25 (5785) </h1>
+        
+        <!-- Add Create Event Button -->
+        <div class="text-end mb-3">
+            <a href="{{ url_for('add_event') }}" class="btn btn-primary">Add Event</a>
+        </div>
+        <div class="text-end mb-3">
+            <a href="{{ url_for('home') }}" class="btn btn-primary">Home</a>
+        </div>
+        <table class="table table-bordered table-striped mt-4">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Month</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Venue</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if events %}
+                    {% for event in events %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ event.month }}</td>
+                        <td>{{ event.event_date.strftime('%d-%m-%Y') }}</td>
+                        <td>{{ event.event_desc }}</td>
+                        <td>{{ event.event_venue }}</td>
+                        <td>{{ event.event_status }}</td>
+                        <td>
+                            <!-- Links for Update and Delete -->
+                            <a href="{{ url_for('update_event', event_id=event.id) }}" class="btn btn-warning btn-sm">Update</a>
+                            <a href="url_for('delete_event', event_id=event.id)" class="btn btn-danger btn-sm"
+                               onclick="return confirm('Are you sure you want to delete this event?');">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="7" class="text-center">No events available</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+    <div class="text-end mb-3">
+        <a href="#" class="btn btn-primary">Scheduled Events</a>
+    </div>
+    <div class="text-end mb-3">
+        <a href="#" class="btn btn-primary">Postponed Events</a>
+    </div>
+</body>
+
+{% endblock content %}

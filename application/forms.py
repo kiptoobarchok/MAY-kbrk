@@ -115,3 +115,15 @@ class ResetPasswordForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password', message='The passwords must match')])
     submit =SubmitField('Reset Password')
+
+class EventCreationForm(FlaskForm):
+    month = StringField('Month', validators=[DataRequired(), Length(max=20)])
+    event_date = DateField('Event Date', format='%Y-%m-%d', validators=[DataRequired()])
+    event_desc = StringField('Event Description', validators=[DataRequired(), Length(max=255)])
+    event_venue = StringField('Event Venue', validators=[DataRequired(), Length(max=100)])
+    event_status = SelectField(
+        'Event Status',
+        choices=[('done', 'Done'), ('postponed', 'Postponed'), ('scheduled', 'Scheduled')],
+        validators=[DataRequired()]
+    )
+    submit = SubmitField('Add Event')

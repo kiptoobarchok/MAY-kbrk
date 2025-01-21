@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
 from dotenv import load_dotenv
+from flask_migrate import Migrate
 import os
 
 #load environment variables
@@ -31,9 +32,10 @@ mail=Mail(app)
 
 db = SQLAlchemy(app)
 bcrypt =  Bcrypt(app)
+migrate = Migrate(app, db)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
 print(type(app.config['SECRET_KEY']), app.config['SECRET_KEY'])
 
-from application import routes
+from application import routes, models

@@ -70,3 +70,17 @@ class Body(db.Model):
 
     def __repr__(self):
         return f"Q&A:  {self.question}, {self.answers} - Lesson {self.lesson_id}"
+    
+# Events model schema
+
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    month = db.Column(db.String(20), nullable=False)
+    event_date = db.Column(db.Date, nullable=False)
+    event_desc  = db.Column(db.Text, nullable=False)
+    event_venue  = db.Column(db.Text, nullable=False)
+    event_status  = db.Column(db.Enum('done', 'postponed', 'scheduled', name='status_enum', default='scheduled'), nullable=False)
+
+    def __repr__(self):
+        return f'<Event {self.event_desc}, on  {self.event_date} at {self.event_venue}>'
+
