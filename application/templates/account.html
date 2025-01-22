@@ -83,7 +83,7 @@
     <ul class="list-group">
       {% for announcement in announcements %}
         <li class="list-group-item">
-          <a href="{{ url_for('announcements', announcement_id=announcement.id) }}" class="text-decoration-none text-primary">
+          <a href="{{ url_for('announcements.announcements', announcement_id=announcement.id) }}" class="text-decoration-none text-primary">
             {{ announcement.title }}
           </a>
         </li>
@@ -93,8 +93,8 @@
 
   <!-- Navigation Links -->
   <div class="mt-4">
-    <a href="{{ url_for('home') }}" class="btn btn-outline-secondary me-2">Back to Home</a>
-    <a href="{{ url_for('logout') }}" class="btn btn-outline-danger">Logout</a>
+    <a href="{{ url_for('main.home') }}" class="btn btn-outline-secondary me-2">Back to Home</a>
+    <a href="{{ url_for('main.logout') }}" class="btn btn-outline-danger">Logout</a>
   </div>
 </div>
 {% endblock content %}

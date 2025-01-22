@@ -32,7 +32,7 @@
   <div class="container py-4 flex-grow-1">
     <!-- Header Section -->
     <div class="text-center mb-4">
-      <img src="{{ url_for('static', filename='images/church.jpeg') }}" alt="Church Banner" class="img-fluid rounded shadow">
+      <img src="{{ url_for('main.'main.'static', filename='images/church.jpeg') }}" alt="Church Banner" class="img-fluid rounded shadow">
     </div>
 
     <div class="row text-center mb-4">

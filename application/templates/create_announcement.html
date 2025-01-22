@@ -23,6 +23,15 @@
           {% endfor %}
         </div>
 
+
+        <!-- Branch Field -->
+        <div class="mb-3">
+          <label for="title" class="form-label">{{ form.branch.label }}</label>
+          {{ form.branch(class="form-control", id="branch") }}
+          {% for err in form.branch.errors %}
+            <div class="text-danger small mt-1">[{{ err }}]</div>
+          {% endfor %}
+        </div>
         <!-- Content Field -->
         <div class="mb-4">
           <label for="content" class="form-label">{{ form.content.label }}</label>
@@ -35,7 +44,7 @@
         <!-- Submit Button -->
         <div class="d-flex justify-content-between align-items-center">
           {{ form.post(class="btn btn-primary") }}
-          <a href="{{ url_for('announcements') }}" class="btn btn-secondary">View Announcements</a>
+          <a href="{{ url_for('announcements.announcements') }}" class="btn btn-secondary">View Announcements</a>
         </div>
       </form>
     </div>

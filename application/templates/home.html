@@ -12,21 +12,21 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           {% if current_user.role == 'admin' %}
-          <li class="nav-item"><a class="nav-link" href="{{ url_for('members') }}">Members</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('main.members') }}">Members</a></li>
 
           {% endif %}
 
           {% if current_user.is_anonymous %}
-            <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Log in</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ url_for('signup') }}">Sign Up</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('main.login') }}">Log in</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('main.signup') }}">Sign Up</a></li>
           {% else %}
-            <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Log out</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ url_for('account') }}">Account</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('main.logout') }}">Log out</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('users.account') }}">Account</a></li>
           {% endif %}
-          <li class="nav-item"><a class="nav-link" href="{{ url_for('about_us') }}">About Us</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ url_for('announcements') }}">Announcements</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ url_for('lessons') }}">Lessons</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{url_for('events')}}">Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('main.about_us') }}">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('announcements.announcements') }}">Announcements</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('lessons.lessons') }}">Lessons</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{url_for('events.events')}}">Events</a></li>
         </ul>
       </div>
     </div>
@@ -107,9 +107,9 @@
         <div class="col-md-4">
           <h5 class="text-warning">Quick Links</h5>
           <ul class="list-unstyled">
-            <li><a href="{{ url_for('home') }}" class="text-white text-decoration-none">Home</a></li>
-            <li><a href="{{ url_for('announcements') }}" class="text-white text-decoration-none">Announcements</a></li>
-            <li><a href="{{ url_for('lessons') }}" class="text-white text-decoration-none">Lessons</a></li>
+            <li><a href="{{ url_for('main.home') }}" class="text-white text-decoration-none">Home</a></li>
+            <li><a href="{{ url_for('announcements.announcements') }}" class="text-white text-decoration-none">Announcements</a></li>
+            <li><a href="{{ url_for('lessons.lessons') }}" class="text-white text-decoration-none">Lessons</a></li>
           </ul>
         </div>
         <div class="col-md-4">

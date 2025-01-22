@@ -7,10 +7,10 @@ from dotenv import load_dotenv
 from flask_migrate import Migrate
 import os
 
-#load environment variables
+#load environment variables 
 load_dotenv()
 
-app = Flask(__name__, static_url_path='/static')
+app = Flask (__name__, static_url_path='/static')
 secret_key=os.getenv('SECRET_KEY')
 app.config['SECRET_KEY'] = secret_key
 
@@ -34,8 +34,20 @@ db = SQLAlchemy(app)
 bcrypt =  Bcrypt(app)
 migrate = Migrate(app, db)
 login_manager = LoginManager(app)
-login_manager.login_view = 'login'
+login_manager.login_view = 'main.login'
 
 print(type(app.config['SECRET_KEY']), app.config['SECRET_KEY'])
 
-from application import routes, models
+from application.users.routes import users
+from application.main.routes import main
+from application.lessons.routes import lessons_bp
+from application.events.routes import events_bp
+from application.announcements.routes import announcements_bp
+
+
+app.register_blueprint(users)
+app.register_blueprint(main)
+app.register_blueprint(lessons_bp)
+app.register_blueprint(events_bp)
+app.register_blueprint(announcements_bp)
+ 

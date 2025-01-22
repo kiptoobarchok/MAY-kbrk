@@ -6,8 +6,8 @@
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="display-6">Announcements</h1> <br>
     <div>
-      <a href="{{ url_for('create_announcement') }}" class="btn btn-primary">Create Announcement</a> <br> <br>
-      <a href="{{ url_for('sabbath_schedule') }}" class="btn btn-secondary">Sabbath Schedule</a>
+      <a href="{{ url_for('announcements.create_announcement') }}" class="btn btn-primary">Create Announcement</a> <br> <br>
+      <a href="{{ url_for('announcements.sabbath_schedule') }}" class="btn btn-secondary">Sabbath Schedule</a>
     </div>
   </div>
 
@@ -27,7 +27,7 @@
         <div class="flex-grow-1">
             <b><small class="text-muted mt-2">{{ announcement.author.firstname }} {{announcement.author.lastname}}</small></b>
           <h5>
-            <a href="{{ url_for('show_announcement', announcement_id=announcement.id) }}" class="text-decoration-none text-primary">
+            <a href="{{ url_for('announcements.show_announcement', announcement_id=announcement.id) }}" class="text-decoration-none text-primary">
               {{ announcement.title }}
             </a>
           </h5>
@@ -43,7 +43,7 @@
       {% for page_num in announcements.iter_pages() %}
         {% if page_num %}
           <li class="page-item">
-            <a class="page-link" href="{{ url_for('announcements', page=page_num) }}">{{ page_num }}</a>
+            <a class="page-link" href="{{ url_for('announcements.announcements', page=page_num) }}">{{ page_num }}</a>
           </li>
         {% else %}
           <li class="page-item disabled"><span class="page-link">...</span></li>
@@ -54,7 +54,9 @@
 
   <!-- Footer -->
   <footer class="text-center mt-4">
-    <a href="{{ url_for('home') }}" class="btn btn-outline-primary">Home</a>
+    <a href="{{ url_for('main.home') }}" class="btn btn-outline-primary">Home</a>
+    <a href="{{ url_for('announcements.general_announcements') }}" class="btn btn-outline-primary">General announcements</a>
+
   </footer>
 </div>
 {% endblock content %}

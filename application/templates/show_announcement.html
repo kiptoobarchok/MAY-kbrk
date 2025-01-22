@@ -27,10 +27,10 @@
       <!-- Buttons for Edit/Delete -->
       {% if announcement.author == current_user %}
       <div class="d-flex gap-2">
-        <a href="{{ url_for('update_announcement', announcement_id=announcement.id) }}" class="btn btn-warning">
+        <a href="{{ url_for('announcements.update_announcement', announcement_id=announcement.id) }}" class="btn btn-warning">
           Update Announcement
         </a>
-        <a href="{{ url_for('delete_announcement', announcement_id=announcement.id) }}" class="btn btn-danger">
+        <a href="{{ url_for('announcements.delete_announcement', announcement_id=announcement.id) }}" class="btn btn-danger">
           Delete Announcement
         </a>
       </div>
@@ -40,7 +40,7 @@
 
   <!-- Back to Announcements Link -->
   <div class="text-center mt-4">
-    <a href="{{ url_for('announcements') }}" class="btn btn-outline-secondary">Back to Announcements</a>
+    <a href="{{ url_for('announcements.announcements') }}" class="btn btn-outline-secondary">Back to Announcements</a>
   </div>
 </div>
 {% endblock content %}

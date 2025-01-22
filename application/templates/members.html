@@ -10,7 +10,7 @@
 
   <!-- Pastor Section -->
   <div class="text-center mb-4">
-    <a href="{{ url_for('Pastor') }}" class="btn btn-primary">
+    <a href="{{ url_for('main.Pastor') }}" class="btn btn-primary">
       Meet our Resident Pastor
     </a>
   </div>
@@ -48,7 +48,7 @@
         {% for page_num in members.iter_pages() %}
           {% if page_num %}
             <li class="page-item {% if page_num == members.page %}active{% endif %}">
-              <a class="page-link" href="{{ url_for('members', page=page_num) }}">{{ page_num }}</a>
+              <a class="page-link" href="{{ url_for('main.members', page=page_num) }}">{{ page_num }}</a>
             </li>
           {% else %}
             <li class="page-item disabled">
@@ -62,7 +62,7 @@
 
   <!-- Navigation Back to Home -->
   <div class="text-center mt-4">
-    <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">Back to Home</a>
+    <a href="{{ url_for('main.home') }}" class="btn btn-outline-secondary">Back to Home</a>
   </div>
 </div>
 {% endblock content %}
