@@ -76,6 +76,7 @@ class Body(db.Model):
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     month = db.Column(db.String(20), nullable=False)
+    branch = db.Column(db.String(20), nullable=False)
     event_date = db.Column(db.Date, nullable=False)
     event_desc  = db.Column(db.Text, nullable=False)
     event_venue  = db.Column(db.Text, nullable=False)
