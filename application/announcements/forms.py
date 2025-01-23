@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms.validators import DataRequired
 from wtforms import StringField,  SubmitField, TextAreaField, SelectField
-
+from flask_login import current_user,  AnonymousUserMixin
 
 class CreateAnnouncementForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
@@ -31,7 +31,7 @@ class UpdateAnnouncementForm(FlaskForm):
                                             ('isebania','ISEBANIA'),
                                             ('nyabangi', 'NYABANGI'),
                                             ('general', 'GENERAL')],              
-                         validators=[DataRequired()])
+                        validators=[DataRequired()])
     content = TextAreaField('Announcement')
     post = SubmitField('Update Announcement')
 

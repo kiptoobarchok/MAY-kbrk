@@ -19,6 +19,8 @@
           {% if current_user.is_anonymous %}
             <li class="nav-item"><a class="nav-link" href="{{ url_for('main.login') }}">Log in</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ url_for('main.signup') }}">Sign Up</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Blogs</a></li>
+    
           {% else %}
             <li class="nav-item"><a class="nav-link" href="{{ url_for('main.logout') }}">Log out</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ url_for('users.account') }}">Account</a></li>
@@ -27,6 +29,8 @@
           <li class="nav-item"><a class="nav-link" href="{{ url_for('announcements.announcements') }}">Announcements</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ url_for('lessons.lessons') }}">Lessons</a></li>
           <li class="nav-item"><a class="nav-link" href="{{url_for('events.events')}}">Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Blogs</a></li>
+
         </ul>
       </div>
     </div>
