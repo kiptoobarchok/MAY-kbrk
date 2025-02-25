@@ -4,16 +4,18 @@
 <div class="container py-4">
 
   <!-- Add Lesson Link -->
-  <div class="mb-4">
-    <a href="{{ url_for('lessons.add_lesson') }}" class="btn btn-success">Add Lesson</a>
+  <div class="mb-4 text-center">
+    <a href="{{ url_for('lessons.add_lesson') }}" class="btn btn-success btn-lg">
+      <i class="bi bi-plus-circle"></i> Add Lesson
+    </a>
   </div>
 
   <!-- Lessons List -->
   <fieldset class="mb-4">
     {% for lesson in lessons %}
-      <div class="mb-3">
-        <a href="{{ url_for('lessons.view_lesson', lesson_id=lesson.id) }}" class="text-decoration-none text-primary">
-          <h5>{{ lesson.title }} - {{ lesson.date_posted.strftime('%d/%m/%Y') }}</h5>
+      <div class="mb-3 p-3 bg-light rounded shadow-sm">
+        <a href="{{ url_for('lessons.view_lesson', lesson_id=lesson.id) }}" class="text-decoration-none text-dark">
+          <h5 class="mb-1">{{ lesson.id }}.    {{ lesson.title }}</h5>
         </a>
       </div>
     {% endfor %}
@@ -36,12 +38,20 @@
 
   <!-- Download Button -->
   <div class="text-center mt-4">
-    <a href="{{ url_for('static', filename='Lessons/lsn1-may.pdf') }}" class="btn btn-warning">Download All Lessons</a>
+    <a href="{{ url_for('static', filename='Lessons/lsn1-may.pdf') }}" class="btn btn-warning btn-lg">
+      <i class="bi bi-cloud-download"></i> Download All Lessons
+    </a>
   </div>
 
   <!-- Footer -->
   <div class="mt-4 text-center">
-    <small><h5><a href="{{ url_for('main.home') }}" class="btn btn-outline-primary">Home</a></h5></small>
+    <small>
+      <h5>
+        <a href="{{ url_for('main.home') }}" class="btn btn-outline-primary btn-lg">
+          <i class="bi bi-house-door"></i> Home
+        </a>
+      </h5>
+    </small>
   </div>
 
 </div>

@@ -2,55 +2,61 @@
 
 {% block content %}
 <div class="container mt-5">
-    <!-- Title -->
-    <h1 class="mb-4 text-center">{{ title }}</h1>
+    <!-- Title Section -->
+    <div class="text-center mb-5">
+        <h1 class="fw-bold text-primary">{{ title }}</h1>
+        <hr class="w-50 mx-auto" style="border: 2px solid #0d6efd;">
+    </div>
 
-    <!-- Form -->
-    <form action="" method="post" class="needs-validation" novalidate>
+    <!-- Form Section -->
+    <form action="" method="post" class="needs-validation shadow p-4 rounded bg-light" novalidate>
         {{ form.hidden_tag() }}
 
         <!-- Question Field -->
         <div class="mb-4">
-            <label for="question" class="form-label">{{ form.question.label }}</label>
-            {{ form.question(class="form-control", id="question") }}
+            <label for="question" class="form-label fw-bold">Question:</label>
+            {{ form.question(class="form-control", id="question", placeholder="Enter the question") }}
             {% for err in form.question.errors %}
-            <div class="text-danger">
-                <small>{{ err }}</small>
-            </div>
-            {% endfor %}
-        </div>
-
-        <!-- Answers Field -->
-        <div class="mb-4">
-            <label for="answers" class="form-label">{{ form.answers.label }}</label>
-            {{ form.answers(class="form-control", id="answers") }}
-            {% for err in form.answers.errors %}
-            <div class="text-danger">
-                <small>{{ err }}</small>
+            <div class="text-danger mt-1">
+                <small><i class="bi bi-exclamation-circle"></i> {{ err }}</small>
             </div>
             {% endfor %}
         </div>
 
         <!-- Lesson ID Field -->
         <div class="mb-4">
-            <label for="lesson_id" class="form-label">{{ form.lesson_id.label }}</label>
-            {{ form.lesson_id(class="form-control", id="lesson_id") }}
+            <label for="question" class="form-label fw-bold">Question:</label>
+            {{ form.lesson_id(class="form-control", id="question", placeholder="Enter the lesson ID") }}
             {% for err in form.lesson_id.errors %}
-            <div class="text-danger">
-                <small>{{ err }}</small>
+            <div class="text-danger mt-1">
+                <small><i class="bi bi-exclamation-circle"></i> {{ err }}</small>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- Answers Field -->
+        <div class="mb-4">
+            <label for="answers" class="form-label fw-bold">Answers:</label>
+            {{ form.answers(class="form-control", id="answers", placeholder="Memory verses") }}
+            {% for err in form.answers.errors %}
+            <div class="text-danger mt-1">
+                <small><i class="bi bi-exclamation-circle"></i> {{ err }}</small>
             </div>
             {% endfor %}
         </div>
 
         <!-- Submit Button -->
-        <div class="d-grid gap-2">
-            {{ form.submit(class="btn btn-primary btn-lg") }}
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg px-5">
+                <i class="bi bi-save"></i> Save
+            </button>
         </div>
     </form>
 
     <!-- Navigation Links -->
     <div class="mt-4 text-center">
-        <a href="{{ url_for('main.home') }}" class="btn btn-outline-secondary">Back to Home</a>
+        <a href="{{ url_for('main.home') }}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Home
+        </a>
     </div>
 </div>
 {% endblock content %}

@@ -2,30 +2,39 @@
 
 {% block content %}
 <div class="container mt-5">
-    <!-- Title -->
-    <h1 class="mb-4">{{ title }}</h1>
+
+    <!-- Title Section -->
+    <div class="text-center mb-4">
+        <h1 class="fw-bold text-primary">{{ title }}</h1>
+        <hr class="w-50 mx-auto" style="border: 2px solid #0d6efd;">
+    </div>
 
     <!-- Body Content -->
     {% if body %}
-    <ul class="list-group">
+    <ul class="list-group list-group-flush">
         {% for entry in body %}
-        <li class="list-group-item mb-3">
-            <strong>Question:</strong> {{ entry.question }}<br>
-            <strong>Answers:</strong>
+        <li class="list-group-item mb-3 p-4 border rounded shadow-sm bg-light">
+            <p class="mb-2">
+                <strong class="text-dark">❓ Question:</strong> {{ entry.question }}
+            </p>
             <p class="mt-2">
-                {{ entry.answers if entry.answers else 'No answers provided' }}
+                <strong class="text-dark">✅ Answers:</strong> 
+                <span class="d-block text-muted">{{ entry.answers if entry.answers else 'No answers provided' }}</span>
             </p>
         </li>
         {% endfor %}
     </ul>
     {% else %}
-    <p class="text-muted">No body content found for this lesson.</p>
+    <p class="text-center text-muted mt-4">
+        <i class="bi bi-info-circle"></i> No body content found for this lesson.
+    </p>
     {% endif %}
-</div>
 
-<!-- Update Q&A Button -->
-<div class="text-center mt-4">
-    <a href="#" class="btn btn-warning">Update Q and A</a>
+    <!-- Update Q&A Button -->
+    <div class="text-center mt-5">
+        <a href="#" class="btn btn-warning btn-lg">
+            <i class="bi bi-pencil-square"></i> Update Q&A
+        </a>
+    </div>
 </div>
-
 {% endblock content %}

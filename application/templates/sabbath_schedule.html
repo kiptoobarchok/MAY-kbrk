@@ -1,22 +1,66 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2 class="text-center">Daily Sabbath Schedule</h2>
-    <div class="schedule mt-4">
-        <p><strong>Start Time:</strong> 8:00 AM</p>
-        <p><strong>First Session:</strong> 8:00 AM - 9:00 AM</p>
-        <p class="ms-3"><i>Praise and Worship</i></p>
-        <p><strong>Second Session:</strong> 9:00 AM - 10:00 AM</p>
-        <p class="ms-3"><i>10 Commandments</i></p>
-        <p><strong>Third Session:</strong> 10:00 AM - 11:30 AM</p>
-        <p class="ms-3"><i>Lesson</i></p>
-        <p><strong>Fourth Session:</strong> 11:30 AM - 12:00 PM</p>
-        <p class="ms-3"><i>Song Presentations</i></p>
-        <p><strong>Fifth Session:</strong> 12:00 PM - 12:30 PM</p>
-        <p class="ms-3"><i>Announcements</i></p>
-        <p><strong>Sixth Session:</strong> 12:30 PM - 1:00 PM</p>
-        <p class="ms-3"><i>Pastor's Sermon and Closing Prayer</i></p>
-    </div>
+<div class="container py-5" style="background-color: #2b2d33; border-radius: 8px; color: #d6d6d6;">
+  <!-- Page Header -->
+  <div class="text-center mb-4">
+    <h2 class="display-6 fw-bold" style="color: #e0d6b8;">Daily Sabbath Schedule</h2>
+    <p class="text-muted">Follow the order of events for today's Sabbath</p>
+  </div>
+
+  <!-- Table Section -->
+  <div class="schedule-table">
+    <table class="table table-bordered table-striped text-center" style="border-radius: 10px; color: #e0d6b8;">
+      <thead>
+        <tr style="background-color: #424242;">
+          <th class="col-2">Time</th>
+          <th class="col-10">Session Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Start Time -->
+        <tr style="background-color: #35363a;">
+          <td><strong>8:00 AM 🕗</strong></td>
+          <td><strong>Start Time</strong></td>
+        </tr>
+
+        <!-- First Session -->
+        <tr style="background-color: #424242;">
+          <td><strong>8:00 AM - 9:00 AM 🎶</strong></td>
+          <td><i>Praise and Worship 🙏</i></td>
+        </tr>
+
+        <!-- Second Session -->
+        <tr style="background-color: #424242;">
+          <td><strong>9:00 AM - 10:00 AM 📜</strong></td>
+          <td><i>10 Commandments 📖</i></td>
+        </tr>
+
+        <!-- Third Session -->
+        <tr style="background-color: #424242;">
+          <td><strong>10:00 AM - 11:30 AM 📚</strong></td>
+          <td><i>Lesson 📖</i></td>
+        </tr>
+
+        <!-- Fourth Session -->
+        <tr style="background-color: #424242;">
+          <td><strong>11:30 AM - 12:00 PM 🎤</strong></td>
+          <td><i>Song Presentations 🎶</i></td>
+        </tr>
+
+        <!-- Fifth Session -->
+        <tr style="background-color: #424242;">
+          <td><strong>12:00 PM - 12:30 PM 📣</strong></td>
+          <td><i>Announcements 📰</i></td>
+        </tr>
+
+        <!-- Sixth Session -->
+        <tr style="background-color: #424242;">
+          <td><strong>12:30 PM - 1:00 PM 🙌</strong></td>
+          <td><i>Pastor's Sermon and Closing Prayer ✝️</i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 {% endblock content %}

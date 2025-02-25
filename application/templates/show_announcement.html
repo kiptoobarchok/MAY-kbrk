@@ -1,37 +1,37 @@
-{% extends "layout.html"%}
+{% extends "layout.html" %}
 
 {% block content %}
-<div class="container mt-5">
-  <div class="card shadow-sm">
+<div class="container mt-5 bg-white text-dark rounded shadow-sm p-4">
+  <div class="card border-0 shadow-sm rounded-3">
     <div class="card-body">
       <!-- Author Information -->
-      <div class="d-flex align-items-center mb-3">
+      <div class="d-flex align-items-center mb-4">
         <img
           src="{{ url_for('static', filename='profile_pics/' + announcement.author.image_file) }}"
           alt="Author's profile picture"
-          class="rounded-circle"
+          class="rounded-circle shadow-sm"
           style="width: 50px; height: 50px; object-fit: cover;"
         >
         <div class="ms-3">
-          <h6 class="mb-0">{{ announcement.author.firstname }} {{announcement.author.lastname}}</h6>
-          <small class="text-muted">{{ announcement.date_posted.strftime('%d/%m/%Y , %H:%M') }}</small>
+          <h6 class="mb-0 text-primary">{{ announcement.author.firstname }} {{ announcement.author.lastname }}</h6>
+          <small class="text-muted">{{ announcement.date_posted.strftime('%d/%m/%Y, %H:%M') }}</small>
         </div>
       </div>
 
       <!-- Announcement Title -->
-      <h3 class="card-title text-primary"><u>{{ announcement.title }}</u></h3>
+      <h3 class="card-title text-primary">{{ announcement.title }}</h3>
 
       <!-- Announcement Content -->
-      <p class="card-text">{{ announcement.content }}</p>
+      <p class="card-text text-secondary">{{ announcement.content }}</p>
 
       <!-- Buttons for Edit/Delete -->
       {% if announcement.author == current_user %}
-      <div class="d-flex gap-2">
-        <a href="{{ url_for('announcements.update_announcement', announcement_id=announcement.id) }}" class="btn btn-warning">
-          Update Announcement
+      <div class="d-flex gap-2 mt-3">
+        <a href="{{ url_for('announcements.update_announcement', announcement_id=announcement.id) }}" class="btn btn-outline-primary">
+          <i class="bi bi-pencil"></i> Update Announcement
         </a>
-        <a href="{{ url_for('announcements.delete_announcement', announcement_id=announcement.id) }}" class="btn btn-danger">
-          Delete Announcement
+        <a href="{{ url_for('announcements.delete_announcement', announcement_id=announcement.id) }}" class="btn btn-outline-danger">
+          <i class="bi bi-trash"></i> Delete Announcement
         </a>
       </div>
       {% endif %}
@@ -39,8 +39,10 @@
   </div>
 
   <!-- Back to Announcements Link -->
-  <div class="text-center mt-4">
-    <a href="{{ url_for('announcements.announcements') }}" class="btn btn-outline-secondary">Back to Announcements</a>
+  <div class="text-center mt-5">
+    <a href="{{ url_for('announcements.announcements') }}" class="btn btn-outline-secondary">
+      <i class="bi bi-arrow-left-circle"></i> Back to Announcements
+    </a>
   </div>
 </div>
 {% endblock content %}

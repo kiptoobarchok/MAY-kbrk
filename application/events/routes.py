@@ -14,14 +14,22 @@ events_bp = Blueprint('events', __name__)
 
 @events_bp.route('/events', methods=['POST', 'GET'])
 def events():
-  # query to fetch al events from the database
-  if current_user.is_authenticated:
-    events = Event.query.filter_by(branch=current_user.branch).order_by(Event.event_date.asc()).all()
-  else:
-     return redirect(url_for('main.login'))
+    if not current_user.is_authenticated:
+        return redirect(url_for('main.login'))
 
-  return render_template('events.html', events=events, title='Events')
+    # Set the number of events to display per page
+    per_page = 22
 
+    # Get the current page from the request arguments (default is page 1)
+    page = request.args.get('page', 1, type=int)
+
+    # Query to fetch events, paginated
+    events = Event.query.filter_by(branch=current_user.branch).order_by(Event.event_date.desc()).paginate(page=page, per_page=per_page, error_out=False)
+    # Next and Previous page URLs for pagination
+    next_url = url_for('events.events', page=events.next_num) if events.has_next else None
+    prev_url = url_for('events.events', page=events.prev_num) if events.has_prev else None
+
+    return render_template('events.html', events=events.items, title='Events', next_url=next_url, prev_url=prev_url)
 
 @events_bp.route('/add_event', methods=['GET', 'POST'])
 @login_required  
@@ -86,7 +94,8 @@ def delete_event(event_id):
 def general_events():
   # query to fetch al events from the database
   if current_user.is_authenticated:
-    events = Event.query.all()
+    page = request.args.get('page', 1, type=int)
+    events = Event.query.order_by(Event.event_date.desc()).paginate(page=page, per_page=10)
   else:
      return redirect(url_for('events.login'))
 

@@ -3,9 +3,9 @@
 {% block content %}
 <div class="d-flex flex-column min-vh-100">
   <!-- Navbar Section -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm rounded-3">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="#">Messianic Assembly of Yahweh</a>
+      <a class="navbar-brand fw-bold text-success" href="#">Messianic Assembly of Yahweh</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -13,14 +13,11 @@
         <ul class="navbar-nav ms-auto">
           {% if current_user.role == 'admin' %}
           <li class="nav-item"><a class="nav-link" href="{{ url_for('main.members') }}">Members</a></li>
-
           {% endif %}
-
           {% if current_user.is_anonymous %}
             <li class="nav-item"><a class="nav-link" href="{{ url_for('main.login') }}">Log in</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ url_for('main.signup') }}">Sign Up</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Blogs</a></li>
-    
           {% else %}
             <li class="nav-item"><a class="nav-link" href="{{ url_for('main.logout') }}">Log out</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ url_for('users.account') }}">Account</a></li>
@@ -30,28 +27,27 @@
           <li class="nav-item"><a class="nav-link" href="{{ url_for('lessons.lessons') }}">Lessons</a></li>
           <li class="nav-item"><a class="nav-link" href="{{url_for('events.events')}}">Events</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Blogs</a></li>
-
         </ul>
       </div>
     </div>
   </nav>
 
   <!-- Content Section -->
-  <div class="container py-4 flex-grow-1">
-    <!-- Header Section -->
+  <div class="container py-5 flex-grow-1">
+    <!-- Header Section with Banner -->
     <div class="text-center mb-4">
-      <img src="{{ url_for('static', filename='images/church.jpeg') }}" alt="Church Banner" class="img-fluid rounded shadow">
+      <img src="{{ url_for('static', filename='images/church.jpeg') }}" alt="Church Banner" class="img-fluid rounded-3 shadow-lg">
     </div>
 
     <div class="row text-center mb-4">
       <!-- Motto Card -->
-      <div class="col-md-4">
-        <div class="card shadow-sm border-0">
-          <div class="card-header bg-warning text-white fw-bold">
+      <div class="col-md-4 mb-3">
+        <div class="card shadow-lg border-0 rounded-3">
+          <div class="card-header bg-warning text-white fw-bold fs-5">
             Motto
           </div>
           <div class="card-body">
-            <p class="card-text">WE LOVE WHAT YAHWEH LOVES,<br>AND HATES WHAT HE HATES</p>
+            <p class="card-text fs-6">WE LOVE WHAT YAHWEH LOVES,<br>AND HATE WHAT HE HATES</p>
           </div>
           <div class="card-footer bg-light">
             <small class="text-muted">Guiding Principle for All Believers</small>
@@ -60,13 +56,13 @@
       </div>
     
       <!-- Creed Card -->
-      <div class="col-md-4">
-        <div class="card shadow-sm border-0">
-          <div class="card-header bg-success text-white fw-bold">
+      <div class="col-md-4 mb-3">
+        <div class="card shadow-lg border-0 rounded-3">
+          <div class="card-header bg-success text-white fw-bold fs-5">
             OUR CREED
           </div>
           <div class="card-body">
-            <p class="card-text">HERE IS THE PATIENCE OF THE SAINTS, HERE ARE THOSE<br>
+            <p class="card-text fs-6">HERE IS THE PATIENCE OF THE SAINTS, HERE ARE THOSE<br>
               WHO KEEP THE COMMANDMENTS OF YAHWEH AND THE FAITH OF YAHSHUA THE MESSIAH.<br>
               <strong>REVELATIONS 14:12</strong>
             </p>
@@ -78,13 +74,13 @@
       </div>
     
       <!-- Weekly Verse Card -->
-      <div class="col-md-4">
-        <div class="card shadow-sm border-0">
-          <div class="card-header bg-info text-white fw-bold">
+      <div class="col-md-4 mb-3">
+        <div class="card shadow-lg border-0 rounded-3">
+          <div class="card-header bg-info text-white fw-bold fs-5">
             Weekly Verse
           </div>
           <div class="card-body">
-            <p class="card-text">"Study to show yourself approved to YAHWEH, a workman that needs not to be ashamed, rightly dividing the word of truth."</p>
+            <p class="card-text fs-6">"Study to show yourself approved to YAHWEH, a workman that needs not to be ashamed, rightly dividing the word of truth."</p>
             <i><b>2 Tim. 2:15</b></i>
           </div>
           <div class="card-footer bg-light">
@@ -93,21 +89,20 @@
         </div>
       </div>
     </div>
-    
 
     <!-- MPesa Donations Section -->
-    <div class="text-center p-4 rounded bg-success text-white mb-4 shadow">
-      <h3>For Donations, Offerings, and Tithes</h3>
-      <p>PAYBILL NUMBER: <span class="fw-bold">247247</span></p>
-      <p>ACCOUNT NUMBER: <span class="fw-bold">608379</span></p>
+    <div class="text-center p-5 rounded-3 bg-success text-white mb-4 shadow-lg">
+      <h3 class="fw-bold">For Donations, Offerings, and Tithes</h3>
+      <p class="fs-5">PAYBILL NUMBER: <span class="fw-bold">247247</span></p>
+      <p class="fs-5">ACCOUNT NUMBER: <span class="fw-bold">608379</span></p>
     </div>
   </div>
 
   <!-- Footer Section -->
-  <footer class="text-center bg-dark text-white py-4 shadow-lg mt-auto">
+  <footer class="text-center bg-dark text-white py-5 shadow-lg mt-auto rounded-3">
     <div class="container">
       <!-- Footer Links -->
-      <div class="row mb-3">
+      <div class="row mb-4">
         <div class="col-md-4">
           <h5 class="text-warning">Quick Links</h5>
           <ul class="list-unstyled">
@@ -118,18 +113,18 @@
         </div>
         <div class="col-md-4">
           <h5 class="text-success">Follow Us</h5>
-          <div class="d-flex justify-content-center gap-3">
-            <a href="https://web.facebook.com/messianiczimmerman/?_rdc=1&_rdr" class="text-white text-decoration-none">
-              <img src="{{ url_for('static', filename='Icons/facebook.png') }}" alt="Facebook" width="30">
+          <div class="d-flex justify-content-center gap-4">
+            <a href="https://web.facebook.com/messianiczimmerman/?_rdc=1&_rdr" class="text-white text-decoration-none" target="_blank">
+              <img src="{{ url_for('static', filename='Icons/facebook.png') }}" alt="Facebook" width="35">
             </a>
-            <a href="#" class="text-white text-decoration-none">
-              <img src="{{ url_for('static', filename='Icons/twitter.png') }}" alt="Twitter" width="30">
+            <a href="#" class="text-white text-decoration-none" target="_blank">
+              <img src="{{ url_for('static', filename='Icons/twitter.png') }}" alt="Twitter" width="35">
             </a>
-            <a href="https://www.youtube.com/@M.A.Y.ZIMMERMAN" class="text-white text-decoration-none">
-              <img src="{{ url_for('static', filename='Icons/youtube.png') }}" alt="YouTube" width="30">
+            <a href="https://www.youtube.com/@M.A.Y.ZIMMERMAN" class="text-white text-decoration-none" target="_blank">
+              <img src="{{ url_for('static', filename='Icons/youtube.png') }}" alt="YouTube" width="35">
             </a>
-            <a href="#" class="text-white text-decoration-none">
-              <img src="{{ url_for('static', filename='Icons/whatsapp.png') }}" alt="WhatsApp" width="30">
+            <a href="#" class="text-white text-decoration-none" target="_blank">
+              <img src="{{ url_for('static', filename='Icons/whatsapp.png') }}" alt="WhatsApp" width="35">
             </a>
           </div>
         </div>
@@ -137,7 +132,7 @@
           <h5 class="text-info">Contact Us</h5>
           <p>Email: <a href="mailto:info@may.org" class="text-white text-decoration-none">info@mayministries.org</a></p>
           <p>Phone: <span class="text-white">+254 743 248 407</span></p>
-          <a href="https://mayministries.org/" class="text-white text-decoration-none" >May Ministries Org Website</a>
+          <a href="https://mayministries.org/" class="text-white text-decoration-none" target="_blank">Visit Our Website</a>
         </div>
       </div>
       <!-- Footer Copyright -->

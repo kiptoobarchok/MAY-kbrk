@@ -2,75 +2,109 @@
 
 {% block content %}
 <div class="container mt-5">
-  <!-- Add Lesson Form -->
-  <fieldset>
-    <legend class="text-primary">Add Lesson</legend>
-    <form action="" method="POST" class="mt-4">
+  <!-- Add Lesson Form Title -->
+  <div class="text-center mb-5">
+    <h1 class="fw-bold text-primary">Add a New Lesson</h1>
+    <p class="text-muted">Fill in the details below to add a new lesson.</p>
+    <hr class="w-50 mx-auto" style="border: 2px solid #0d6efd;">
+  </div>
+
+  <!-- Form Section -->
+  <fieldset class="shadow p-4 rounded bg-light">
+    <legend class="fw-bold text-secondary mb-4">Lesson Details</legend>
+    <form action="" method="POST" class="needs-validation" novalidate>
       {{ form.hidden_tag() }}
 
       <!-- Title Field -->
-      <div class="mb-3">
-        <label for="title" class="form-label">{{ form.title.label }}</label>
-        {{ form.title(class="form-control", id="title") }}
+      <div class="mb-4">
+        <label for="title" class="form-label fw-bold">Lesson Title:</label>
+        {{ form.title(class="form-control", id="title", placeholder="Enter the lesson title") }}
         {% for err in form.title.errors %}
-        <small class="text-danger">[{{ err }}]</small>
+        <div class="text-danger mt-1">
+          <small><i class="bi bi-exclamation-circle"></i> {{ err }}</small>
+        </div>
         {% endfor %}
       </div>
 
+      <!-- Id field -->
+      <div class="mb-4">
+        <label for="title" class="form-label fw-bold">Lesson id:</label>
+        {{ form.lesson_id(class="form-control", id="title", placeholder="Enter the lesson ID") }}
+        {% for err in form.lesson_id.errors %}
+        <div class="text-danger mt-1">
+          <small><i class="bi bi-exclamation-circle"></i> {{ err }}</small>
+        </div>
+        {% endfor %}
+      </div>
       <!-- Date Posted Field -->
-      <div class="mb-3">
-        <label for="date_posted" class="form-label">{{ form.date_posted.label }}</label>
-        {{ form.date_posted(class="form-control", id="date_posted") }}
+      <div class="mb-4">
+        <label for="date_posted" class="form-label fw-bold">Date Posted:</label>
+        {{ form.date_posted(class="form-control", id="date_posted", placeholder="Select the date") }}
         {% for err in form.date_posted.errors %}
-        <small class="text-danger">[{{ err }}]</small>
+        <div class="text-danger mt-1">
+          <small><i class="bi bi-exclamation-circle"></i> {{ err }}</small>
+        </div>
         {% endfor %}
       </div>
 
       <!-- Introduction Field -->
-      <div class="mb-3">
-        <label for="introduction" class="form-label">{{ form.introduction.label }}</label>
-        {{ form.introduction(class="form-control", id="introduction") }}
+      <div class="mb-4">
+        <label for="introduction" class="form-label fw-bold">Introduction:</label>
+        {{ form.introduction(class="form-control", id="introduction", placeholder="lesson introduction") }}
         {% for err in form.introduction.errors %}
-        <small class="text-danger">[{{ err }}]</small>
+        <div class="text-danger mt-1">
+          <small><i class="bi bi-exclamation-circle"></i> {{ err }}</small>
+        </div>
         {% endfor %}
       </div>
 
       <!-- Conclusion Field -->
-      <div class="mb-3">
-        <label for="conclusion" class="form-label">{{ form.conclusion.label }}</label>
-        {{ form.conclusion(class="form-control", id="conclusion") }}
+      <div class="mb-4">
+        <label for="conclusion" class="form-label fw-bold">Conclusion:</label>
+        {{ form.conclusion(class="form-control", id="conclusion", placeholder="lesson conclusion") }}
         {% for err in form.conclusion.errors %}
-        <small class="text-danger">[{{ err }}]</small>
+        <div class="text-danger mt-1">
+          <small><i class="bi bi-exclamation-circle"></i> {{ err }}</small>
+        </div>
         {% endfor %}
       </div>
 
       <!-- Memory Verse Field -->
-      <div class="mb-3">
-        <label for="memory_verse" class="form-label">{{ form.memory_verse.label }}</label>
-        {{ form.memory_verse(class="form-control", id="memory_verse") }}
+      <div class="mb-4">
+        <label for="memory_verse" class="form-label fw-bold">Memory Verse:</label>
+        {{ form.memory_verse(class="form-control", id="memory_verse", placeholder="Memory verse of the day ") }}
         {% for err in form.memory_verse.errors %}
-        <small class="text-danger">[{{ err }}]</small>
+        <div class="text-danger mt-1">
+          <small><i class="bi bi-exclamation-circle"></i> {{ err }}</small>
+        </div>
         {% endfor %}
       </div>
 
       <!-- Scripture Reading Field -->
-      <div class="mb-3">
-        <label for="scripture_reading" class="form-label">{{ form.scripture_reading.label }}</label>
-        {{ form.scripture_reading(class="form-control", id="scripture_reading") }}
+      <div class="mb-4">
+        <label for="scripture_reading" class="form-label fw-bold">Scripture Reading:</label>
+        {{ form.scripture_reading(class="form-control", id="scripture_reading", placeholder="Scripture reading reference") }}
         {% for err in form.scripture_reading.errors %}
-        <small class="text-danger">[{{ err }}]</small>
+        <div class="text-danger mt-1">
+          <small><i class="bi bi-exclamation-circle"></i> {{ err }}</small>
+        </div>
         {% endfor %}
       </div>
 
       <!-- Submit Button -->
-      <div class="d-grid">
-        {{ form.submit(class="btn btn-primary") }}
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary btn-lg px-5">
+          <i class="bi bi-check-circle"></i> Save Lesson
+        </button>
       </div>
     </form>
   </fieldset>
-  <!-- Home Link -->
-  <div class="mt-4">
-    <a href="{{ url_for('main.home') }}" class="btn btn-outline-primary">Home</a>
+
+  <!-- Back to Home Button -->
+  <div class="text-center mt-4">
+    <a href="{{ url_for('main.home') }}" class="btn btn-outline-secondary">
+      <i class="bi bi-arrow-left"></i> Back to Home
+    </a>
   </div>
 </div>
 {% endblock content %}

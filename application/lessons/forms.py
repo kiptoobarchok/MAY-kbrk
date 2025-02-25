@@ -5,6 +5,7 @@ from wtforms.validators import DataRequired
 class AddLessonForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     date_posted = DateField('Date', validators=[DataRequired()])
+    lesson_id = IntegerField('Lesson ID')
     scripture_reading = TextAreaField('Scripture Reading', validators=[DataRequired()])
     memory_verse = TextAreaField('Memory Verse', validators=[DataRequired()])
     introduction = TextAreaField('Introduction')

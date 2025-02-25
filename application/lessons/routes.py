@@ -70,8 +70,8 @@ def update_lesson(lesson_id):
         form.conclusion.data = lesson.conclusion
     return render_template('update_lesson.html', title=lesson.title, lesson=lesson, form=form)
 
-@lessons_bp.route('/add_content', methods=['GET', 'POST'])
-@login_required  
+@lessons_bp.route('/lesson/add_content', methods=['GET', 'POST'])
+@login_required
 def add_content():
     if current_user.role != 'admin':
       abort(403)

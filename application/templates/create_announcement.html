@@ -1,50 +1,54 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="container py-5">
+<div class="container py-5" style="background-color: #2b2d33; border-radius: 8px; color: #d6d6d6;">
   <!-- Page Header -->
   <div class="text-center mb-4">
-    <h1 class="display-6">Create a New Announcement</h1>
-    <p class="text-muted">Share updates and important information with the community</p>
+    <h1 class="display-6 fw-bold" style="color: #e0d6b8;">Create a New Announcement</h1>
+    <p class="text-muted text-decoration: #e0d6b8; ">Share updates and important information with the community</p>
   </div>
 
   <!-- Form Section -->
-  <div class="card shadow-sm">
+  <div class="card shadow-sm" style="background-color: #35363a; border: none; border-radius: 10px;">
     <div class="card-body">
       <form action="" method="post">
         {{ form.hidden_tag() }}
 
         <!-- Title Field -->
         <div class="mb-3">
-          <label for="title" class="form-label">{{ form.title.label }}</label>
-          {{ form.title(class="form-control", id="title") }}
+          <label for="title" class="form-label" style="color: #e6cba5;">{{ form.title.label }}</label>
+          {{ form.title(class="form-control", id="title", style="background-color: #424242; color: #d6d6d6; border: none;") }}
           {% for err in form.title.errors %}
-            <div class="text-danger small mt-1">[{{ err }}]</div>
+            <div class="text-danger small mt-1">{{ err }}</div>
           {% endfor %}
         </div>
-
 
         <!-- Branch Field -->
         <div class="mb-3">
-          <label for="title" class="form-label">{{ form.branch.label }}</label>
-          {{ form.branch(class="form-control", id="branch") }}
+          <label for="branch" class="form-label" style="color: #e6cba5;">{{ form.branch.label }}</label>
+          {{ form.branch(class="form-control", id="branch", style="background-color: #424242; color: #d6d6d6; border: none;") }}
           {% for err in form.branch.errors %}
-            <div class="text-danger small mt-1">[{{ err }}]</div>
+            <div class="text-danger small mt-1">{{ err }}</div>
           {% endfor %}
         </div>
+
         <!-- Content Field -->
         <div class="mb-4">
-          <label for="content" class="form-label">{{ form.content.label }}</label>
-          {{ form.content(class="form-control", id="content") }}
+          <label for="content" class="form-label" style="color: #e6cba5;">{{ form.content.label }}</label>
+          {{ form.content(class="form-control", id="content", style="background-color: #424242; color: #d6d6d6; border: none;") }}
           {% for err in form.content.errors %}
-            <div class="text-danger small mt-1">[{{ err }}]</div>
+            <div class="text-danger small mt-1">{{ err }}</div>
           {% endfor %}
         </div>
 
         <!-- Submit Button -->
         <div class="d-flex justify-content-between align-items-center">
-          {{ form.post(class="btn btn-primary") }}
-          <a href="{{ url_for('announcements.announcements') }}" class="btn btn-secondary">View Announcements</a>
+          <button type="submit" class="btn" style="background-color: #424242; color: #e6cba5; border: none;">
+            Submit Announcement
+          </button>
+          <a href="{{ url_for('announcements.announcements') }}" class="btn" style="background-color: #424242; color: #d6d6d6;">
+            <i class="bi bi-arrow-left-circle"></i> View Announcements
+          </a>
         </div>
       </form>
     </div>

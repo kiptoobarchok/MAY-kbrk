@@ -1,87 +1,145 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<body>
-    <div class="container mt-5">
-        <!-- Header -->
-        <div class="text-center mb-4">
-            <h1 class="display-5 fw-bold">Upcoming Events for Year 2024/25 (5785)</h1>
-            <p class="text-muted">Stay updated with all the scheduled events!</p>
-        </div>
+<div class="container mt-5">
+  <!-- Header -->
+  <div class="text-center mb-4">
+    <h1 class="display-5">Upcoming Events for Year 2024/25 (5785)</h1>
+    <p class="text-muted">Stay updated with all the scheduled events!</p>
+  </div>
 
-        <!-- Action Buttons -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <div>
-                <a href="{{ url_for('events.add_event') }}" class="btn btn-success">
-                    <i class="bi bi-plus-circle"></i> Add Event
-                </a>
-                <a href="{{ url_for('main.home') }}" class="btn btn-secondary">
-                    <i class="bi bi-house-door"></i> Home
-                </a>
-            </div>
-            <div>
-                <a href="#" class="btn btn-primary">Scheduled Events</a>
-                <a href="{{ url_for('events.general_events') }}" class="btn btn-primary">General Events</a>
-                <a href="#" class="btn btn-primary">Postponed Events</a>
-            </div>
-        </div>
-
-        <!-- Events Table -->
-        <div class="table-responsive">
-            <table class="table table-hover table-striped align-middle">
-                <thead class="table-dark text-center">
-                    <tr>
-                        <th>#</th>
-                        <th>Month</th>
-                        <th>Date</th>
-                        <th>Description</th>
-                        <th>Venue</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                        <th>Add to Calendar</th> <!-- New column for adding to calendar -->
-                    </tr>
-                </thead>
-                <tbody>
-                    {% if events %}
-                        {% for event in events %}
-                        <tr>
-                            <td class="text-center">{{ loop.index }}</td>
-                            <td class="text-center">{{ event.month }}</td>
-                            <td class="text-center">{{ event.event_date.strftime('%d-%m-%Y') }}</td>
-                            <td>{{ event.event_desc }}</td>
-                            <td class="text-center">{{ event.event_venue }}</td>
-                            <td class="text-center">
-                                <span class="badge {{ 'bg-success' if event.event_status == 'Active' else 'bg-secondary' }}">
-                                    {{ event.event_status }}
-                                </span>
-                            </td>
-                            <td class="text-center">
-                                <a href="{{ url_for('events.update_event', event_id=event.id) }}" class="btn btn-warning btn-sm">
-                                    <i class="bi bi-pencil-square"></i> Update
-                                </a>
-                                <a href="{{ url_for('events.delete_event', event_id=event.id) }}" class="btn btn-danger btn-sm"
-                                   onclick="return confirm('Are you sure you want to delete this event?');">
-                                    <i class="bi bi-trash"></i> Delete
-                                </a>
-                            </td>
-                            <td class="text-center">
-                                <!-- Button to add the event to the calendar -->
-                                <a href="{{ url_for('events.download_ics', event_id=event.id) }}" class="btn btn-info btn-sm" role="button">
-                                    <i class="bi bi-calendar-plus"></i> Add to Calendar
-                                </a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    {% else %}
-                        <tr>
-                            <td colspan="8" class="text-center text-muted">
-                                <i class="bi bi-info-circle"></i> No events available at the moment.
-                            </td>
-                        </tr>
-                    {% endif %}
-                </tbody>
-            </table>
-        </div>
+  <!-- Responsive Navigation Links -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light rounded shadow-sm mb-4">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a href="{{ url_for('main.home') }}" class="nav-link btn btn-outline-secondary mb-2 mb-lg-0 mx-1">
+              <i class="bi bi-house-door"></i> Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link btn btn-outline-primary mb-2 mb-lg-0 mx-1">Scheduled Events</a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url_for('events.general_events') }}" class="nav-link btn btn-outline-primary mb-2 mb-lg-0 mx-1">General Events</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link btn btn-outline-primary mb-2 mb-lg-0 mx-1">Postponed Events</a>
+          </li>
+        </ul>
+      </div>
     </div>
-</body>
+  </nav>
+
+  <!-- Action Buttons -->
+  {% if current_user.is_authenticated and current_user.role == 'admin' %}
+  <div class="d-flex justify-content-end mb-3">
+    <a href="{{ url_for('events.add_event') }}" class="btn btn-success btn-lg">
+      <i class="bi bi-plus-circle"></i> Add Event
+    </a>
+  </div>
+  {% endif %}
+
+  <!-- Events Table -->
+  <div class="table-responsive mb-4">
+    <table class="table table-hover table-striped align-middle table-bordered">
+      <thead class="table-dark text-center">
+        <tr>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Venue</th>
+          <th>Status</th>
+          <th>Actions</th>
+          <th>Add to Calendar</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if events %}
+          {% for event in events %}
+          <tr>
+            <td class="text-center">{{ event.event_date.strftime('%d-%m-%Y') }}</td>
+            <td>{{ event.event_desc }}</td>
+            <td class="text-center">{{ event.event_venue }}</td>
+            <td class="text-center">
+              <span class="badge {{ 'bg-success' if event.event_status == 'Active' else 'bg-secondary' }}">
+                {{ event.event_status }}
+              </span>
+            </td>
+            <td class="text-center">
+              {% if current_user.role == 'admin' %}
+              <a href="{{ url_for('events.update_event', event_id=event.id) }}" class="btn btn-warning btn-sm">
+                <i class="bi bi-pencil-square"></i> Update
+              </a>
+              <a href="{{ url_for('events.delete_event', event_id=event.id) }}" class="btn btn-danger btn-sm"
+                 onclick="return confirm('Are you sure you want to delete this event?');">
+                <i class="bi bi-trash"></i> Delete
+              </a>
+              {% endif %}
+            </td>
+            <td class="text-center">
+              <div class="btn-group" role="group">
+                <a href="{{ url_for('events.download_ics', event_id=event.id) }}" class="btn btn-info btn-sm">
+                  <i class="bi bi-calendar-plus"></i> Add to Calendar
+                </a>
+                <a href="{{ url_for('events.get_event', event_id=event.id) }}" class="btn btn-secondary btn-sm">
+                  <i class="bi bi-eye"></i> View
+                </a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="8" class="text-center text-muted">
+              <i class="bi bi-info-circle"></i> No events available at the moment.
+            </td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination Controls -->
+  <nav aria-label="Events pagination" class="d-flex justify-content-center mt-4">
+    <ul class="pagination">
+      {% if prev_url %}
+      <li class="page-item">
+        <a class="page-link" href="{{ prev_url }}">
+          <i class="bi bi-chevron-left"></i> Previous
+        </a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">
+          <i class="bi bi-chevron-left"></i> Previous
+        </span>
+      </li>
+      {% endif %}
+
+      <li class="page-item disabled">
+        <span class="page-link">
+          Page {{ current_page }} of {{ total_pages }}
+        </span>
+      </li>
+
+      {% if next_url %}
+      <li class="page-item">
+        <a class="page-link" href="{{ next_url }}">
+          Next <i class="bi bi-chevron-right"></i>
+        </a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">
+          Next <i class="bi bi-chevron-right"></i>
+        </span>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
 {% endblock content %}

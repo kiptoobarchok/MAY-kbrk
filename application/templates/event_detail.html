@@ -2,24 +2,49 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h1>Event Details</h1>
-    <table class="table table-bordered">
-        <tr>
-            <th>Date</th>
-            <td>{{ event.event_date.strftime('%d-%m-%Y') }}</td>
-        </tr>
-        <tr>
-            <th>Description</th>
-            <td>{{ event.event_desc }}</td>
-        </tr>
-        <tr>
-            <th>Venue</th>
-            <td>{{ event.event_venue }}</td>
-        </tr>
-        <tr>
-            <th>Status</th>
-            <td>{{ event.event_status }}</td>
-        </tr>
-    </table>
+    <!-- Header -->
+    <div class="text-center mb-4">
+        <h1 class="display-5">Event Details</h1>
+        <p class="text-muted">Get detailed information about the event.</p>
+    </div>
+
+    <!-- Event Details Card -->
+    <div class="card shadow-sm rounded">
+        <div class="card-body">
+            <table class="table table-striped align-middle">
+                <tbody>
+                    <tr>
+                        <th scope="row" class="bg-light text-end fw-bold" style="width: 20%;">Date</th>
+                        <td>{{ event.event_date.strftime('%d-%m-%Y') }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-light text-end fw-bold">Description</th>
+                        <td>{{ event.event_desc }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-light text-end fw-bold">Venue</th>
+                        <td>{{ event.event_venue }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-light text-end fw-bold">Status</th>
+                        <td>
+                            <span class="badge {{ 'bg-success' if event.event_status == 'Active' else 'bg-secondary' }}">
+                                {{ event.event_status }}
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+        <br>
+        <a href="{{ url_for('events.events') }}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Events
+        </a>
+    </div>
+    
 </div>
 {% endblock %}
+

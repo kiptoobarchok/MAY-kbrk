@@ -65,7 +65,7 @@ def update_announcement(announcement_id):
 
   if form.validate_on_submit():
     announcement.title = form.title.data
-    announcement.branch = form.announcement.data
+    announcement.branch = form.branch.data
     announcement.content = form.content.data
     db.session.commit()
     db.session.refresh(announcement)
@@ -94,9 +94,11 @@ def general_announcements():
     # Ensure the user is authenticated
     if not current_user.is_authenticated:
         abort(403)
-    page = request.args.get('page', 1, type=int)    
-  # Query the database for all announcements
-    announcements=Announcement.query.order_by(Announcement.date_posted.desc()).paginate(page=page, per_page=15)
-    return render_template('general_announcements.html', title='Announcements', announcements=announcements)
-
     
+    page = request.args.get('page', 1, type=int)  # Get page number from the query params (default is 1)
+    
+    # Query the database for all announcements, ordered by the most recent
+    announcements = Announcement.query.order_by(Announcement.date_posted.desc()).paginate(page=page, per_page=10)
+    
+    # Render the template and pass the paginated announcements object
+    return render_template('general_announcements.html', title='General Announcements', announcements=announcements)

@@ -1,62 +1,85 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="container py-4">
+<div class="container py-5" style="background-color: #f8f9fa; border-radius: 8px; color: #333;">
   <!-- Header Section -->
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="display-6">Announcements</h1> <br>
-    <div>
-      <a href="{{ url_for('announcements.create_announcement') }}" class="btn btn-primary">Create Announcement</a> <br> <br>
-      <a href="{{ url_for('announcements.sabbath_schedule') }}" class="btn btn-secondary">Sabbath Schedule</a>
+  <div class="d-flex justify-content-between align-items-center mb-5">
+    <h1 class="display-6 fw-bold" style="color: #343a40;">📢 General Announcements</h1>
+    <div class="d-flex flex-column gap-2">
+      <a href="{{ url_for('announcements.create_announcement') }}" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Make a General Announcement to all branches
+      </a>
     </div>
   </div>
 
   <!-- Announcements List -->
-  {% for announcement in announcements %}
-    <div class="card mb-3 shadow-sm">
-      <div class="card-body d-flex align-items-start">
-        <!-- Author Image and Date Section -->
-        <div class="d-flex flex-column align-items-center me-3" style="min-width: 60px;">
-          <!-- Author Image -->
-          <img src="{{ url_for('static', filename='profile_pics/' + announcement.author.image_file) }}" alt="Author" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
-          <!-- Date -->
-          <small class="text-muted mt-2">{{ announcement.date_posted.strftime('%d/%m/%Y , %H:%M') }}</small>
-        </div>
-        
-        <!-- Announcement Content Section -->
-        <div class="flex-grow-1">
-            <b><small class="text-muted mt-2">{{ announcement.author.firstname }} {{announcement.author.lastname}}</small></b>
-          <h5>
+  {% if announcements %}
+    {% for announcement in announcements %}
+      <div class="card mb-4" style="background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 10px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
+        <div class="card-body d-flex align-items-start">
+          <!-- Author Image and Date -->
+          <div class="d-flex flex-column align-items-center me-4">
+            <img src="{{ url_for('static', filename='profile_pics/' + announcement.author.image_file) }}" alt="Author" class="rounded-circle shadow-sm" style="width: 50px; height: 50px; object-fit: cover;">
+            <small class="mt-2 text-muted">{{ announcement.date_posted.strftime('%d/%m/%Y, %H:%M') }}</small>
+          </div>
+          
+          <!-- Announcement Content -->
+          <div class="flex-grow-1">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="mb-2">
+                <a href="{{ url_for('announcements.show_announcement', announcement_id=announcement.id) }}" class="text-decoration-none text-primary">
+                  {{ announcement.title }}
+                </a>
+              </h5>
+              <div class="text-end">
+                <small class="text-secondary">{{ announcement.author.firstname }} {{ announcement.author.lastname }}</small>
+                <br>
+                <small class="text-muted">Branch: {{ announcement.author.branch }}</small>
+              </div>
+            </div>
+            <p class="text-muted">{{ announcement.content[:200] }}{% if announcement.content|length > 200 %}...{% endif %}</p>
             <a href="{{ url_for('announcements.show_announcement', announcement_id=announcement.id) }}" class="text-decoration-none text-primary">
-              {{ announcement.title }}
+              <strong>Read more</strong> <i class="bi bi-arrow-right-circle"></i>
             </a>
-          </h5>
-          <p class="text-muted">{{ announcement.content }}</p>
-          <p class="text-muted">{{ announcement.branch }}</p>
-
+          </div>
         </div>
       </div>
+    {% endfor %}
+  {% else %}
+    <div class="alert alert-info text-center" role="alert" style="border-radius: 10px;">
+      <i class="bi bi-exclamation-circle"></i> No announcements available at the moment.
     </div>
-  {% endfor %}
+  {% endif %}
 
-  <!-- Pagination -->
-  <nav aria-label="Announcements pagination">
-    <ul class="pagination justify-content-center">
-      {% for page_num in announcements.iter_pages() %}
-        {% if page_num %}
-          <li class="page-item">
-            <a class="page-link" href="{{ url_for('announcements.announcements', page=page_num) }}">{{ page_num }}</a>
-          </li>
-        {% else %}
-          <li class="page-item disabled"><span class="page-link">...</span></li>
-        {% endif %}
-      {% endfor %}
-    </ul>
-  </nav>
 
-  <!-- Footer -->
-  <footer class="text-center mt-4">
-    <a href="{{ url_for('main.home') }}" class="btn btn-outline-primary">Home</a>
+    <!-- Pagination -->
+    {% if announcements.has_pages %}
+    <nav aria-label="Announcements pagination" class="mt-4">
+      <ul class="pagination justify-content-center">
+        {% for page_num in announcements.iter_pages() %}
+          {% if page_num %}
+            <li class="page-item {% if page_num == announcements.page %}active{% endif %}">
+              <a class="page-link border-primary text-primary" href="{{ url_for('announcements.announcements', page=page_num) }}">{{ page_num }}</a>
+            </li>
+          {% else %}
+            <li class="page-item disabled">
+              <span class="page-link bg-white text-muted border-light">...</span>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
+  {% endif %}
+
+
+  <!-- Footer Links -->
+  <footer class="text-center mt-5">
+    <a href="{{ url_for('main.home') }}" class="btn btn-secondary">
+      <i class="bi bi-house-door"></i> Home
+    </a>
+    <a href="{{ url_for('announcements.announcements') }}" class="btn btn-secondary">
+      <i class="bi bi-bullhorn"></i> Branch's Announcements
+    </a>
   </footer>
 </div>
 {% endblock content %}

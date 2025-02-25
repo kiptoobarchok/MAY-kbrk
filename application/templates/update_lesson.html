@@ -2,35 +2,57 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h1 class="mb-4">{{ title }}</h1>
-    <form method="POST">
+    <!-- Form Title -->
+    <div class="text-center mb-4">
+        <h1 class="fw-bold text-primary">{{ title }}</h1>
+        <hr class="w-50 mx-auto" style="border: 2px solid #0d6efd;">
+    </div>
+
+    <!-- Form Section -->
+    <form method="POST" class="shadow p-4 rounded bg-light">
         {{ form.hidden_tag() }}
-        <div class="mb-3">
-            <label for="title" class="form-label">Title:</label> <br>
-            {{ form.title(class="form-control") }}
-        </div>  <br>
-        <div class="mb-3">
-            <label for="title" class="form-label">Date:</label> <br>
-            {{ form.date_posted(class="form-control") }}
-        </div>  <br>
-        <div class="mb-3">
-            <label for="scripture_reading" class="form-label">Scripture Reading:</label> <br>
-            {{ form.scripture_reading(class="form-control") }}
-        </div> <br>
-        <div class="mb-3">
-            <label for="memory_verse" class="form-label">Memory Verse:</label> <br>
-            {{ form.memory_verse(class="form-control") }}
-        </div> <br>
-        <div class="mb-3">
-            <label for="introduction" class="form-label">Introduction:</label> <br>
-            {{ form.introduction(class="form-control") }}
-        </div><br>
-        <div class="mb-3">
-            <label for="conclusion" class="form-label">Conclusion:</label> <br>
-            {{ form.conclusion(class="form-control") }}
-        </div> <br>
-        <div class="mb-3">
-            <button type="submit" class="btn btn-primary">Save Changes</button>
+        
+        <!-- Title Field -->
+        <div class="mb-4">
+            <label for="title" class="form-label fw-bold">Title:</label>
+            {{ form.title(class="form-control", placeholder="Enter the lesson title") }}
+        </div>
+
+        <!-- Date Field -->
+        <div class="mb-4">
+            <label for="date_posted" class="form-label fw-bold">Date:</label>
+            {{ form.date_posted(class="form-control", placeholder="Select the lesson date") }}
+        </div>
+
+        <!-- Scripture Reading Field -->
+        <div class="mb-4">
+            <label for="scripture_reading" class="form-label fw-bold">Scripture Reading:</label>
+            {{ form.scripture_reading(class="form-control", placeholder="Enter scripture reading") }}
+        </div>
+
+        <!-- Memory Verse Field -->
+        <div class="mb-4">
+            <label for="memory_verse" class="form-label fw-bold">Memory Verse:</label>
+            {{ form.memory_verse(class="form-control", placeholder="Enter memory verse") }}
+        </div>
+
+        <!-- Introduction Field -->
+        <div class="mb-4">
+            <label for="introduction" class="form-label fw-bold">Introduction:</label>
+            {{ form.introduction(class="form-control", rows="3", placeholder="Write the introduction") }}
+        </div>
+
+        <!-- Conclusion Field -->
+        <div class="mb-4">
+            <label for="conclusion" class="form-label fw-bold">Conclusion:</label>
+            {{ form.conclusion(class="form-control", rows="3", placeholder="Write the conclusion") }}
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg">
+                <i class="bi bi-save"></i> Save Changes
+            </button>
         </div>
     </form>
 </div>
